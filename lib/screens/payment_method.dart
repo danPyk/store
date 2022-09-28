@@ -38,10 +38,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
     _shippingController =
         Provider.of<ShippingController>(context, listen: false);
     _orderController = Provider.of<OrderController>(context, listen: false);
-    StripeService.init();
+    //todo stripe
+    //StripeService.init();
   }
 
   @override
+  //todo
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
@@ -349,15 +351,16 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
                     onPressed: () async {
                       await _progressDialog.show();
+//todo STRIPE
 
-                      var result = await StripeService.processPayment(
-                          totalToString, 'usd');
-
-                      if (result.success) {
-                        _handleStripeSucessPayment();
-                      } else {
-                        _handleStripeFailurePayment();
-                      }
+                      // var result = await StripeService.processPayment(
+                      //     totalToString, 'usd');
+                      //
+                      // if (result.success) {
+                      //   _handleStripeSucessPayment();
+                      // } else {
+                      //   _handleStripeFailurePayment();
+                      // }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

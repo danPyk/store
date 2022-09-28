@@ -17,7 +17,7 @@ class CartController extends ChangeNotifier {
 
   final _authController = AuthController();
 
-  final _cartService = CartService();
+  late final  _cartService = CartService();
 
   List<CartItem> get cart => _cart;
 
@@ -137,7 +137,7 @@ class CartController extends ChangeNotifier {
         var quantity = cartItem.quantity.toString();
         var authData = await _authController.getUserDataAndLoginStatus();
         await _cartService.saveCart(
-            productId, authData[0], quantity, authData[2]);
+            productId, authData[0]!, quantity, authData[2]!);
       }
     } on SocketException catch (_) {
       ErrorController.showNoInternetError(scaffoldKey);
@@ -159,7 +159,7 @@ class CartController extends ChangeNotifier {
       var userId = authData[0];
       var jwtToken = authData[2];
 
-      var response = await _cartService.getCart(userId, jwtToken);
+      var response = await _cartService.getCart(userId!, jwtToken!);
 
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
@@ -183,7 +183,7 @@ class CartController extends ChangeNotifier {
       var authData = await _authController.getUserDataAndLoginStatus();
       var userId = authData[0];
 
-      var response = await _cartService.deleteCart(userId);
+      var response = await _cartService.deleteCart(userId!);
 
       if (response.statusCode == 204) {
         //cart is deleted on check out completion

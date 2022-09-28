@@ -4,13 +4,13 @@ import 'package:flutter_braintree/flutter_braintree.dart';
 class PayPalService {
   static const String tokenizationKey = 'sandbox_9qqht4sx_2c34stzd8dh7rzxb';
 
-  static Future<String> processPayment(
+  static Future<String?> processPayment(
     String amount,
   ) async {
     try {
       final request = BraintreePayPalRequest(amount: amount);
 
-      BraintreePaymentMethodNonce result =
+      BraintreePaymentMethodNonce? result =
           await Braintree.requestPaypalNonce(tokenizationKey, request);
 
       if (result != null) {

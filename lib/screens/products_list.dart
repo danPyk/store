@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProductList extends StatefulWidget {
-  const ProductList({required Key key}) : super(key: key);
+  const ProductList({ Key? key}) : super(key: key);
   static String id = productListScreenId;
 
   @override

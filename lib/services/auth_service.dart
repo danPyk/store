@@ -24,9 +24,9 @@ class AuthService {
     String password,
   ) async {
     var authData = AuthData(name: name, email: email, password: password);
-
+    Uri uri = Uri.parse(AppProperties.signUpUrl);
     return await http.post(
-      AppProperties.signUpUrl,
+      uri,
       body: json.encode(authData.toJson()),
       headers: headers,
     );
@@ -39,7 +39,7 @@ class AuthService {
     var authData = AuthData(name: '', email: email, password: password);
 
     return await http.post(
-      AppProperties.signInUrl,
+      Uri.parse(AppProperties.signUpUrl),
       body: json.encode(authData.toJson()),
       headers: headers,
     );
@@ -50,7 +50,7 @@ class AuthService {
     tokenObject.putIfAbsent('token', () => token);
 
     return await http.post(
-      AppProperties.checkTokenExpiryUrl,
+      Uri.parse(AppProperties.checkTokenExpiryUrl),
       body: json.encode(tokenObject),
       headers: headers,
     );
@@ -62,7 +62,7 @@ class AuthService {
     bodyObject.putIfAbsent('name', () => name);
 
     return await http.patch(
-      "${AppProperties.changenameUrl}$userId",
+      Uri.parse('${AppProperties.changenameUrl}$userId'),
       headers: headers,
       body: json.encode(bodyObject),
     );
@@ -74,7 +74,7 @@ class AuthService {
     bodyObject.putIfAbsent('email', () => email);
 
     return await http.patch(
-      "${AppProperties.changeMailUrl}$userId",
+      Uri.parse('${AppProperties.changeMailUrl}$userId'),
       headers: headers,
       body: json.encode(bodyObject),
     );
@@ -84,7 +84,7 @@ class AuthService {
     var bodyObject = <String, String>{};
     bodyObject.putIfAbsent('email', () => email);
     return await http.post(
-      AppProperties.forgotPasswordUrl,
+      Uri.parse(AppProperties.forgotPasswordUrl),
       headers: headers,
       body: json.encode(bodyObject),
     );

@@ -4,7 +4,8 @@ import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
 
 class CartService {
-  static CartService _cartService;
+  //todo might
+  static late  CartService? _cartService;
 
   CartService._internal() {
     _cartService = this;
@@ -30,7 +31,7 @@ class CartService {
     headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
 
     return await http.post(
-      AppProperties.cartUrl,
+      Uri.parse(AppProperties.cartUrl),
       body: json.encode(bodyObject),
       headers: headers,
     );
@@ -42,7 +43,7 @@ class CartService {
   ) async {
     headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
     return await http.get(
-      '${AppProperties.cartUrl}/$userId',
+      Uri.parse('${AppProperties.cartUrl}/$userId'),
       headers: headers,
     );
   }
@@ -50,6 +51,6 @@ class CartService {
   Future deleteCart(
     String userId,
   ) async {
-    return await http.delete('${AppProperties.cartUrl}/$userId');
+    return await http.delete(Uri.parse('${AppProperties.cartUrl}/$userId'));
   }
 }

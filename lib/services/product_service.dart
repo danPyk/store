@@ -2,7 +2,7 @@ import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
 
 class ProductService {
-  static ProductService _productService;
+  static late  ProductService? _productService;
 
   ProductService._internal() {
     _productService = this;
@@ -13,18 +13,18 @@ class ProductService {
   static var httpClient = http.Client();
 
   Future getAllProducts() async {
-    return await http.get(AppProperties.productUrl);
+    return await http.get(Uri.parse(AppProperties.productUrl));
   }
 
   Future getProductByCategoryOrName(String value) async {
-    return await http.get('${AppProperties.searchByCategoryOrNameUrl}$value');
+    return await http.get(Uri.parse('${AppProperties.searchByCategoryOrNameUrl}$value'));
   }
 
   Future getProductByCategory(String value) async {
-    return await http.get('${AppProperties.searchByCategoryUrl}$value');
+    return await http.get(Uri.parse('${AppProperties.searchByCategoryUrl}$value'));
   }
 
   Future getProductById(String id) async {
-    return await http.get('${AppProperties.productUrl}$id');
+    return await http.get(Uri.parse('${AppProperties.productUrl}$id'));
   }
 }

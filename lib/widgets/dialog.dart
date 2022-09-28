@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
 
 class CDialog {
   late ProgressDialog dialog;
@@ -8,7 +8,7 @@ class CDialog {
     ProgressDialog pr = ProgressDialog(context);
     pr = ProgressDialog(
       context,
-      type: ProgressDialogType.Normal,
+      type: ProgressDialogType.normal,
       isDismissible: false,
       showLogs: false,
     );

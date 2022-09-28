@@ -54,6 +54,7 @@ class store extends StatelessWidget {
         initialRoute: ProductList.id,
         routes: {
           ProductList.id: (context) =>  ProductList(),
+
           ShoppingCart.id: (context) =>  ShoppingCart(),
           ProductDetail.id: (context) =>  ProductDetail(),
           Shipping.id: (context) =>  Shipping(),

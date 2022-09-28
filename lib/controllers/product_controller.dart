@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class ProductController extends ChangeNotifier {
-  final _productService = ProductService();
+   late final _productService = ProductService();
 
   final _productList = <Product>[];
 

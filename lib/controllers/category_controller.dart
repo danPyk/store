@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class CategoryController extends ChangeNotifier {
-  final _categoryService = CategoryService();
+  late final  _categoryService = CategoryService();
 
   var _isLoadingCategories = true;
 

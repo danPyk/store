@@ -134,7 +134,7 @@ class AuthController {
     try {
       var data = await getUserDataAndLoginStatus();
 
-      var response = await _authService.changeName(name, data[0], data[2]);
+      var response = await _authService.changeName(name, data[0]!, data[2]!);
 
       if (response.statusCode == 200) {
         var responseBody = json.decode(response.body);
@@ -166,7 +166,7 @@ class AuthController {
     try {
       var data = await getUserDataAndLoginStatus();
 
-      var response = await _authService.changeEmail(email, data[0], data[2]);
+      var response = await _authService.changeEmail(email, data[0]!, data[2]!);
 
       if (response.statusCode == 200) {
         var responseBody = json.decode(response.body);
