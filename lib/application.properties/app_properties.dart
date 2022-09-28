@@ -1,6 +1,7 @@
+import 'package:store/constants/api_config.dart';
+
 class AppProperties {
-  //static String _baseApiUrl = 'http://10.0.2.2:3000/api/v1';
-  static const String _baseApiUrl = 'https://nehe-ecommerce-api.herokuapp.com/api/v1';
+  static const String _baseApiUrl = ApiConfig.host;
 
   static String productUrl = '$_baseApiUrl/products/';
 

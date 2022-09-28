@@ -27,9 +27,12 @@ class _ProductListState extends State<ProductList> {
   final _textEditingController = TextEditingController();
   //todo
    int? _categorySelectedIndex;
-  var _productController;
+   //todo might changed
+  late final ProductController _productController;
   var _cartController;
   var _categoryController;
+  //todo get ridf of all globalkeys
+  //https://stackoverflow.com/questions/51253630/flutter-access-parent-scaffold-from-different-dart-file
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,14 +55,14 @@ class _ProductListState extends State<ProductList> {
     super.dispose();
   }
 
-  _handleSearchField() {
+  Future<void> _handleSearchField() async{
     _productController.getProductByCategoryOrName(
       _textEditingController.text,
     );
     _categorySelectedIndex = null;
   }
 
-  Future _handleRefresh() {
+  Future<bool> _handleRefresh() {
     _productController.setIsLoadingAllProducts(true);
     _categoryController.setIsLoadingCategories(true);
     _categoryController.getAllCategories(_scaffoldKey);

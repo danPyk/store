@@ -1,13 +1,25 @@
+import 'package:http/http.dart' as http;
 import 'package:store/constants/screen_ids.dart';
 import 'package:store/constants/screen_titles.dart';
 import 'package:store/screens/products_list.dart';
 import 'package:store/screens/single_order.dart';
 import 'package:flutter/material.dart';
 
-class Thanks extends StatelessWidget {
-  const Thanks({Key? key}) : super(key: key);
-  static String id = thankYouScreenId;
+import '../constants/api_config.dart';
+import '../services/product_service.dart';
 
+class Thanks extends StatelessWidget {
+   Thanks({Key? key}) : super(key: key);
+  static String id = thankYouScreenId;
+  ProductService productService = ProductService();
+
+  Future<void> response()async{
+    final response =
+    await http.get(Uri.parse('${ApiConfig.host}/people/id/1/'));
+    print(response.statusCode);
+    print('loggggggggggggggggggggggggggggggggggggggggg');
+  }
+//todo timeout handle
   @override
   Widget build(BuildContext context) {
     Future<bool> _onBackPressed() {
@@ -60,7 +72,18 @@ class Thanks extends StatelessWidget {
                     child: const Text(
                       "VIEW ORDER",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
+                      ),
+                    ),
+
+                  ),           OutlinedButton(
+                    onPressed: () async {
+                     await response();
+                    },
+                    child: const Text(
+                      "TEST BUTTONNNN",
+                      style: TextStyle(
+                        color: Colors.black,
                       ),
                     ),
 

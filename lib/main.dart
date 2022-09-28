@@ -1,3 +1,4 @@
+import 'package:http/http.dart';
 import 'package:store/controllers/activity_tracker_controller.dart';
 import 'package:store/controllers/cart_controller.dart';
 import 'package:store/controllers/category_controller.dart';
@@ -17,24 +18,32 @@ import 'package:store/screens/thank_you.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:store/services/product_service.dart';
 
-void main() {
-  runApp(store());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //TODO add different orientation
+
+
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.grey,
+    statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.grey,
+    systemNavigationBarIconBrightness: Brightness.light,
+  ));
+  runApp(const Main());
 }
 
-class store extends StatelessWidget {
+class Main extends StatelessWidget {
+  const Main({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.grey,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Colors.grey,
-      systemNavigationBarIconBrightness: Brightness.light,
-    ));
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ProductController()),
@@ -51,19 +60,18 @@ class store extends StatelessWidget {
           primarySwatch: Colors.grey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: ProductList.id,
+        initialRoute: Thanks.id,
         routes: {
-          ProductList.id: (context) =>  ProductList(),
-
-          ShoppingCart.id: (context) =>  ShoppingCart(),
-          ProductDetail.id: (context) =>  ProductDetail(),
-          Shipping.id: (context) =>  Shipping(),
-          PaymentMethod.id: (context) =>  PaymentMethod(),
-          Thanks.id: (context) =>   Thanks(),
-          SingleOrder.id: (context) =>  SingleOrder(),
+          ProductList.id: (context) => ProductList(),
+          ShoppingCart.id: (context) => ShoppingCart(),
+          ProductDetail.id: (context) => ProductDetail(),
+          Shipping.id: (context) => Shipping(),
+          PaymentMethod.id: (context) => PaymentMethod(),
+          Thanks.id: (context) => Thanks(),
+          SingleOrder.id: (context) => SingleOrder(),
           AuthScreen.id: (context) => AuthScreen(),
-          OrderHistory.id: (context) =>  OrderHistory(),
-          Profile.id: (context) =>  Profile()
+          OrderHistory.id: (context) => OrderHistory(),
+          Profile.id: (context) => Profile()
         },
       ),
     );

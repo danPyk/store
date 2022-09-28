@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class ProductController extends ChangeNotifier {
-   late final _productService = ProductService();
+    final _productService = ProductService();
 
   final _productList = <Product>[];
 
@@ -20,7 +20,7 @@ class ProductController extends ChangeNotifier {
     _isLoadingAllProducts = value;
     notifyListeners();
   }
-
+//todo buildcontext is passed i guess
   void getAllProducts(GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
       _isLoadingAllProducts = true;
@@ -89,8 +89,8 @@ class ProductController extends ChangeNotifier {
       ErrorController.showUnKownError(scaffoldKey);
     }
   }
-
-  void getProductByCategoryOrName(String value) async {
+//todo efery digit type makes below func call
+  Future<void> getProductByCategoryOrName(String value) async {
     var finalSearchValue = value.trim();
     try {
       _isLoadingAllProducts = true;
@@ -109,6 +109,7 @@ class ProductController extends ChangeNotifier {
         _productList.addAll(productFromJson(json.encode(jsonProd)));
         _isLoadingAllProducts = false;
         notifyListeners();
+        //todo put out those notifyListners outside curly braces
       } else {
         _isLoadingAllProducts = true;
         notifyListeners();

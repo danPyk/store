@@ -1,19 +1,24 @@
 import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
+import 'package:store/constants/error/excpetions.dart';
 
 class ProductService {
-  static late  ProductService? _productService;
 
-  ProductService._internal() {
-    _productService = this;
-  }
+  ProductService() ;
 
-  factory ProductService() => _productService ?? ProductService._internal();
 
   static var httpClient = http.Client();
+//todo fullfill status codes
+  Future<http.Response> getAllProducts() async {
+    http.Response result =  await   http.get(Uri.parse(AppProperties.productUrl));
+    if(result.statusCode == 200){
 
-  Future getAllProducts() async {
-    return await http.get(Uri.parse(AppProperties.productUrl));
+      return result;
+
+    }else{
+    throw ServerException();
+    }
+
   }
 
   Future getProductByCategoryOrName(String value) async {

@@ -10,7 +10,7 @@ import 'package:store/services/order_service.dart';
 import 'package:flutter/material.dart';
 
 class OrderController extends ChangeNotifier {
-  final _orderService = OrderService();
+  late final _orderService = OrderService();
 
   final _authContoller = AuthController();
 
