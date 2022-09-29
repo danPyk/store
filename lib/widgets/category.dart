@@ -14,7 +14,7 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTapped,
+      onTap: () => onTapped(),
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Container(

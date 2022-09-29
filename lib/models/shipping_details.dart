@@ -19,7 +19,7 @@ class ShippingDetails {
 
   factory ShippingDetails.fromJson(Map<String, dynamic> json) =>
       ShippingDetails(
-        id: json["_id"],
+        id: json["id"],
         name: json["name"],
         phoneContact: json["phoneContact"],
         addressLine: json["addressLine"],
@@ -29,7 +29,7 @@ class ShippingDetails {
       );
 
   Map<String, dynamic> toJson() => {
-        "_id": id,
+        "id": id,
         "name": name,
         "phoneContact": phoneContact,
         "addressLine": addressLine,

@@ -2,20 +2,15 @@ import 'dart:convert';
 
 import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
-
+//todo make static with getit?
 class CartService {
   //todo might
-  static late  CartService? _cartService;
 
-  CartService._internal() {
-    _cartService = this;
-  }
+  CartService();
 
-  factory CartService() => _cartService ?? CartService._internal();
 
-  static var httpClient = http.Client();
 
-  static Map<String, String> headers = {'Content-Type': 'application/json'};
+   Map<String, String> headers = {'Content-Type': 'application/json'};
 
   Future saveCart(
     String productId,

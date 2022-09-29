@@ -3,13 +3,13 @@ import 'package:store/constants/api_config.dart';
 class AppProperties {
   static const String _baseApiUrl = ApiConfig.host;
 
-  static String productUrl = '$_baseApiUrl/products/';
+  static String productUrl = '$_baseApiUrl/product/';
 
-  static String categoryUrl = '$_baseApiUrl/categories/';
+  static String categoryUrl = '$_baseApiUrl/product/category/';
 
   static String searchByCategoryOrNameUrl = '$_baseApiUrl/products/search/';
 
-  static String searchByCategoryUrl = '$_baseApiUrl/products/search/category/';
+  static String searchByCategoryUrl = '$_baseApiUrl/product/category/';
 
   static String saveOrderUrl = '$_baseApiUrl/cart/flutter/stripepayment';
 

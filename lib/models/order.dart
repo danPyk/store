@@ -43,7 +43,7 @@ class Order {
   factory Order.fromJson(Map<String, dynamic> jsonData) => Order(
         userId: jsonData["userId"],
         dateOrdered: DateTime.parse(jsonData["dateOrdered"]),
-        id: jsonData["_id"],
+        id: jsonData["id"],
         shippingDetails: ShippingDetails.fromJson(jsonData["shippingDetails"]),
         shippingCost: jsonData["shippingCost"],
         tax: jsonData["tax"],
@@ -52,7 +52,7 @@ class Order {
         paymentMethod: jsonData["paymentMethod"],
         userType: jsonData["userType"],
         cartItems: cartItemFromJson(json.encode(jsonData["cartItems"])),
-        v: jsonData["__v"],
+        v: jsonData["v"],
       );
 
   Map<String, dynamic> toJson() => {

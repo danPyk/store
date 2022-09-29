@@ -15,8 +15,9 @@ class Thanks extends StatelessWidget {
 
   Future<void> response()async{
     final response =
-    await http.get(Uri.parse('${ApiConfig.host}/people/id/1/'));
+    await http.get(Uri.parse('${ApiConfig.host}/product/id/1/'));
     print(response.statusCode);
+    print(response.body);
     print('loggggggggggggggggggggggggggggggggggggggggg');
   }
 //todo timeout handle

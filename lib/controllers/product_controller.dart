@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:http/http.dart';
 import 'package:store/controllers/error_controller.dart';
 import 'package:store/models/product.dart';
 import 'package:store/services/product_service.dart';
@@ -8,9 +9,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class ProductController extends ChangeNotifier {
-    final _productService = ProductService();
+  final _productService = ProductService();
 
-  final _productList = <Product>[];
+  List<Product> _productList = [];
 
   bool _isLoadingAllProducts = true;
 
@@ -20,6 +21,7 @@ class ProductController extends ChangeNotifier {
     _isLoadingAllProducts = value;
     notifyListeners();
   }
+
 //todo buildcontext is passed i guess
   void getAllProducts(GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
@@ -33,8 +35,8 @@ class ProductController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         var responseJsonStr = json.decode(response.body);
-        var jsonProd = responseJsonStr['data']['products'];
-        _productList.addAll(productFromJson(json.encode(jsonProd)));
+
+        _productList = productFromJson(responseJsonStr);
         _isLoadingAllProducts = false;
 
         notifyListeners();
@@ -60,18 +62,14 @@ class ProductController extends ChangeNotifier {
     try {
       _isLoadingAllProducts = true;
 
-      var response = value == 'All'
-          ? await _productService.getAllProducts()
-          : await _productService.getProductByCategory(value);
+      Response response = await _productService.getProductByCategory(value);
 
       if (response.statusCode == 200) {
         var responseJsonStr = json.decode(response.body);
-        var jsonProd = value == 'All'
-            ? responseJsonStr['data']['products']
-            : responseJsonStr['data']['result'];
 
         _productList.clear();
-        _productList.addAll(productFromJson(json.encode(jsonProd)));
+        //todo might
+        _productList = (productFromJson(responseJsonStr));
         _isLoadingAllProducts = false;
 
         notifyListeners();
@@ -89,41 +87,43 @@ class ProductController extends ChangeNotifier {
       ErrorController.showUnKownError(scaffoldKey);
     }
   }
+
 //todo efery digit type makes below func call
-  Future<void> getProductByCategoryOrName(String value) async {
-    var finalSearchValue = value.trim();
-    try {
-      _isLoadingAllProducts = true;
-
-      var response = finalSearchValue == ''
-          ? await _productService.getAllProducts()
-          : await _productService.getProductByCategoryOrName(finalSearchValue);
-
-      if (response.statusCode == 200) {
-        var responseJsonStr = json.decode(response.body);
-        var jsonProd = finalSearchValue == ''
-            ? responseJsonStr['data']['products']
-            : responseJsonStr['data']['result'];
-
-        _productList.clear();
-        _productList.addAll(productFromJson(json.encode(jsonProd)));
-        _isLoadingAllProducts = false;
-        notifyListeners();
-        //todo put out those notifyListners outside curly braces
-      } else {
-        _isLoadingAllProducts = true;
-        notifyListeners();
-      }
-    } on SocketException catch (_) {
-      _isLoadingAllProducts = true;
-      notifyListeners();
-    } on HttpException catch (_) {
-      _isLoadingAllProducts = true;
-      notifyListeners();
-    } catch (e) {
-      print("Error ${e.toString()}");
-      _isLoadingAllProducts = true;
-      notifyListeners();
-    }
-  }
+//   Future<void> getProductByCategoryOrName(String value) async {
+//     var finalSearchValue = value.trim();
+//     try {
+//       _isLoadingAllProducts = true;
+//
+//       var response = finalSearchValue == ''
+//           ? await _productService.getAllProducts()
+//           : await _productService.getProductByCategoryOrName(finalSearchValue);
+//
+//       if (response.statusCode == 200) {
+//         var responseJsonStr = json.decode(response.body);
+//         var jsonProd = finalSearchValue == ''
+//             ? responseJsonStr['data']['products']
+//             : responseJsonStr['data']['result'];
+//
+//         _productList.clear();
+//         //todo
+//         // _productList.addAll(productFromJson(json.encode(jsonProd)));
+//         _isLoadingAllProducts = false;
+//         notifyListeners();
+//         //todo put out those notifyListners outside curly braces
+//       } else {
+//         _isLoadingAllProducts = true;
+//         notifyListeners();
+//       }
+//     } on SocketException catch (_) {
+//       _isLoadingAllProducts = true;
+//       notifyListeners();
+//     } on HttpException catch (_) {
+//       _isLoadingAllProducts = true;
+//       notifyListeners();
+//     } catch (e) {
+//       print("Error ${e.toString()}");
+//       _isLoadingAllProducts = true;
+//       notifyListeners();
+//     }
+//   }
 }

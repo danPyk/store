@@ -60,7 +60,7 @@ class Main extends StatelessWidget {
           primarySwatch: Colors.grey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: Thanks.id,
+        initialRoute: ProductList.id,
         routes: {
           ProductList.id: (context) => ProductList(),
           ShoppingCart.id: (context) => ShoppingCart(),

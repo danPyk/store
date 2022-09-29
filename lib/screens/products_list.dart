@@ -45,7 +45,7 @@ class _ProductListState extends State<ProductList> {
     _categoryController.getAllCategories(_scaffoldKey);
     _cartController = Provider.of<CartController>(context, listen: false);
     _cartController.getSavedCart();
-    _textEditingController.addListener(_handleSearchField);
+   // _textEditingController.addListener(_handleSearchField);
     _categorySelectedIndex = 0;
   }
 
@@ -55,12 +55,12 @@ class _ProductListState extends State<ProductList> {
     super.dispose();
   }
 
-  Future<void> _handleSearchField() async{
-    _productController.getProductByCategoryOrName(
-      _textEditingController.text,
-    );
-    _categorySelectedIndex = null;
-  }
+  // Future<void> _handleSearchField() async{
+  //   _productController.getProductByCategoryOrName(
+  //     _textEditingController.text,
+  //   );
+  //   _categorySelectedIndex = null;
+  // }
 
   Future<bool> _handleRefresh() {
     _productController.setIsLoadingAllProducts(true);

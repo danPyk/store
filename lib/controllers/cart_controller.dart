@@ -17,7 +17,7 @@ class CartController extends ChangeNotifier {
 
   final _authController = AuthController();
 
-  late final  _cartService = CartService();
+   final  _cartService = CartService();
 
   List<CartItem> get cart => _cart;
 

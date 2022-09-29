@@ -1,18 +1,19 @@
 import 'dart:io';
 
+import 'package:http/http.dart';
 import 'package:store/controllers/error_controller.dart';
-import 'package:store/models/category.dart';
 import 'package:store/services/category_service.dart';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
+import '../models/category.dart';
+
+
 class CategoryController extends ChangeNotifier {
-  late final  _categoryService = CategoryService();
+  final _categoryService = CategoryService();
 
   var _isLoadingCategories = true;
 
-  final _categoryList = <CategoryModel>[];
+  List<CategoryModel> _categoryList = [];
 
   List<CategoryModel> get categoryList => _categoryList;
 
@@ -30,12 +31,13 @@ class CategoryController extends ChangeNotifier {
       //to avoid add same items
       _categoryList.clear();
 
-      var response = await _categoryService.getCategories();
+      Response response = await _categoryService.getCategories();
 
+      print(response.body);
       if (response.statusCode == 200) {
-        var jsonBody = json.decode(response.body);
-        var jsonCategories = jsonBody['data']['categories'];
-        _categoryList.addAll(categoryFromJson(json.encode(jsonCategories)));
+        List<String> splitedResponse = response.body.split(',') ;
+        _categoryList =  createList(splitedResponse);
+
         _isLoadingCategories = false;
         notifyListeners();
       } else {
