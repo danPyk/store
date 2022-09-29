@@ -68,7 +68,6 @@ class ProductController extends ChangeNotifier {
         var responseJsonStr = json.decode(response.body);
 
         _productList.clear();
-        //todo might
         _productList = (productFromJson(responseJsonStr));
         _isLoadingAllProducts = false;
 
@@ -88,7 +87,7 @@ class ProductController extends ChangeNotifier {
     }
   }
 
-//todo efery digit type makes below func call
+//todo LATER efery digit type makes below func call
 //   Future<void> getProductByCategoryOrName(String value) async {
 //     var finalSearchValue = value.trim();
 //     try {
@@ -105,11 +104,11 @@ class ProductController extends ChangeNotifier {
 //             : responseJsonStr['data']['result'];
 //
 //         _productList.clear();
-//         //todo
+//         //todo LATER
 //         // _productList.addAll(productFromJson(json.encode(jsonProd)));
 //         _isLoadingAllProducts = false;
 //         notifyListeners();
-//         //todo put out those notifyListners outside curly braces
+//         //todo LATER put out those notifyListners outside curly braces
 //       } else {
 //         _isLoadingAllProducts = true;
 //         notifyListeners();

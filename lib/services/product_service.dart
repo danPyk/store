@@ -7,7 +7,7 @@ class ProductService {
 
   static var httpClient = http.Client();
 
-//todo fullfill status codes
+//todo LATER fullfill status codes
   Future<http.Response> getAllProducts() async {
     http.Response result = await http.get(Uri.parse(AppProperties.productUrl));
     if (result.statusCode == 200) {

@@ -7,7 +7,6 @@ import 'package:store/controllers/shipping_controller.dart';
 import 'package:store/models/shipping_details.dart';
 import 'package:store/screens/payment_method.dart';
 import 'package:store/screens/shopping_cart.dart';
-import 'package:store/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -95,9 +94,9 @@ class _ShippingState extends State<Shipping> {
                           if (value!.isEmpty) {
                             return 'Required';
                           }
-                          if (!Validator.isPhoneNumberValid(value)) {
-                            return "Invalid phone number";
-                          }
+                          // if (!Validator.isPhoneNumberValid(value)) {
+                          //   return "Invalid phone number";
+                          // }
                           return null;
                         },
                         initialValue:
@@ -151,9 +150,9 @@ class _ShippingState extends State<Shipping> {
                           if (value!.isEmpty) {
                             return 'Required';
                           }
-                          if (!Validator.isPostalCodeValid(value)) {
-                            return 'Invalid postal code';
-                          }
+                          // if (!Validator.isPostalCodeValid(value)) {
+                          //   return 'Invalid postal code';
+                          // }
                           return null;
                         },
                         initialValue:
@@ -215,7 +214,7 @@ class _ShippingState extends State<Shipping> {
                         child: const Text(
                           "CONTINUE",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
 

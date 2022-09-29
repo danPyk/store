@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ProductDetailBottomSheetContent extends StatelessWidget {
   const ProductDetailBottomSheetContent({
-     Key? key,
+    Key? key,
     required cartCtlr,
   })  : _cartCtlr = cartCtlr,
         super(key: key);
@@ -21,8 +21,9 @@ class ProductDetailBottomSheetContent extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
+          //todo hyperlink to mail, contact form,
           Text(
-            '${_cartCtlr.selectedItem.product.name} already in cart',
+            "I know it's dope, but ${_cartCtlr.selectedItem.product.name} is already in cart, if you want more contact me',",
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -34,24 +35,23 @@ class ProductDetailBottomSheetContent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              OutlinedButton(
-
-                onPressed: () {
+              InkWell(
+                child: CartButton(
+                  text: 'Remove',
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  key: const Key('cartKey'),
+                ),
+                onTap: () {
                   _cartCtlr.removeFromCart(_cartCtlr.selectedItem);
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  'REMOVE',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
               ),
               const Text('OR'),
               InkWell(
                 child: CartButton(
                   text: 'View cart',
-                  width: MediaQuery.of(context).size.width * 0.25, key: const Key('cartKey'),
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  key: const Key('cartKey'),
                 ),
                 onTap: () {
                   Navigator.pop(context);

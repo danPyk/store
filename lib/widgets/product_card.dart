@@ -13,7 +13,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onProductTapped,
+      onTap: () => onProductTapped(),
       child: Container(
         color: Colors.grey[200],
         child: Column(

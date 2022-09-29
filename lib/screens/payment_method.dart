@@ -8,7 +8,6 @@ import 'package:store/controllers/order_controller.dart';
 import 'package:store/controllers/shipping_controller.dart';
 import 'package:store/screens/thank_you.dart';
 import 'package:store/services/paypal_service.dart';
-import 'package:store/services/stripe_service.dart';
 import 'package:store/widgets/dialog.dart';
 import 'package:store/widgets/global_snackbar.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +29,16 @@ class _PaymentMethodState extends State<PaymentMethod> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   var _progressDialog;
 
+
+  var totalItemPrice;
+
+  var tax;
+
+  var shippingCost;
+
+  var total;
+  var size;
+
   @override
   void initState() {
     super.initState();
@@ -38,88 +47,95 @@ class _PaymentMethodState extends State<PaymentMethod> {
     _shippingController =
         Provider.of<ShippingController>(context, listen: false);
     _orderController = Provider.of<OrderController>(context, listen: false);
+
+     size = MediaQuery
+        .of(context)
+        .size;
+
+    totalItemPrice = _cartController.cart.fold(
+        0,
+            (previousValue, element) =>
+        previousValue + (element.product.price * element.quantity));
+    tax == _orderController.tax;
+    shippingCost = _orderController.shippingCost;
+    total = totalItemPrice + tax + shippingCost;
+
+    String totalToString = '${total}100';
+
+    _progressDialog = CDialog(context).dialog;
+
+
     //todo stripe
     //StripeService.init();
+  }
+
+  _handleStripeSucessPayment(int shippingCost, int tax, int total,
+      String totalItemPrice) async {
+    var data = await _authController.getUserDataAndLoginStatus();
+
+    _orderController.registerOrderWithStripePayment(
+      _shippingController.getShippingDetails(),
+      shippingCost.toString(),
+      tax.toString(),
+      total.toString(),
+      totalItemPrice.toString(),
+      data[0],
+      stripePayment,
+      _cartController.cart,
+      _scaffoldKey,
+    );
+
+    await _progressDialog.hide();
+    _peformStateReset();
+    Navigator.pushNamed(context, Thanks.id);
+  }
+
+  _peformStateReset() {
+    _cartController.resetCart();
+    _shippingController.reset();
+  }
+
+
+  _handleStripeFailurePayment() async {
+    await _progressDialog.hide();
+
+    GlobalSnackBar.showSnackbar(
+      _scaffoldKey,
+      'Process cancelled',
+      SnackBarType.Error,
+    );
+  }
+//todo
+  _handlePaypalBrainTree(String nonce, [int? shippingCost, int? tax, int? total,
+      String? totalItemPrice]) async {
+    var data = await _authController.getUserDataAndLoginStatus();
+
+    _orderController.processOrderWithPaypal(
+      _shippingController.getShippingDetails(),
+      shippingCost.toString(),
+      tax.toString(),
+      total.toString(),
+      totalItemPrice.toString(),
+      data[0],
+      payPall,
+      _cartController.cart,
+      nonce,
+      _scaffoldKey,
+    );
+
+    await _progressDialog.hide();
+    _peformStateReset();
+    Navigator.pushNamed(context, Thanks.id);
   }
 
   @override
   //todo
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
-    var totalItemPrice = _cartController.cart.fold(
-        0,
-        (previousValue, element) =>
-            previousValue + (element.product.price * element.quantity));
-    int tax = _orderController.tax;
-    int shippingCost = _orderController.shippingCost;
-
-    var total = totalItemPrice + tax + shippingCost;
-    String totalToString = '${total}100';
-
-    _progressDialog = CDialog(context).dialog;
-
-    _peformStateReset() {
-      _cartController.resetCart();
-      _shippingController.reset();
-    }
-
-    _handleStripeSucessPayment() async {
-      var data = await _authController.getUserDataAndLoginStatus();
-
-      _orderController.registerOrderWithStripePayment(
-        _shippingController.getShippingDetails(),
-        shippingCost.toString(),
-        tax.toString(),
-        total.toString(),
-        totalItemPrice.toString(),
-        data[0],
-        stripePayment,
-        _cartController.cart,
-        _scaffoldKey,
-      );
-
-      await _progressDialog.hide();
-      _peformStateReset();
-      Navigator.pushNamed(context, Thanks.id);
-    }
-
-    _handleStripeFailurePayment() async {
-      await _progressDialog.hide();
-
-      GlobalSnackBar.showSnackbar(
-        _scaffoldKey,
-        'Process cancelled',
-        SnackBarType.Error,
-      );
-    }
-
-    _handlePaypalBrainTree(String nonce) async {
-      var data = await _authController.getUserDataAndLoginStatus();
-
-      _orderController.processOrderWithPaypal(
-        _shippingController.getShippingDetails(),
-        shippingCost.toString(),
-        tax.toString(),
-        total.toString(),
-        totalItemPrice.toString(),
-        data[0],
-        payPall,
-        _cartController.cart,
-        nonce,
-        _scaffoldKey,
-      );
-
-      await _progressDialog.hide();
-      _peformStateReset();
-      Navigator.pushNamed(context, Thanks.id);
-    }
-
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title:  const Text(
+          title: const Text(
             paymentScreenTitle,
             style: TextStyle(
               color: Colors.black,
@@ -304,7 +320,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   //paypal
                   ButtonTheme(
                     minWidth: size.width,
-                    child: OutlinedButton (
+                    child: OutlinedButton(
 
                       onPressed: () async {
                         await _progressDialog.show();

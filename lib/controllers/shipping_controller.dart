@@ -3,14 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class ShippingController extends ChangeNotifier {
   //todo might added emopty ids x2
-  var shippingDetails = ShippingDetails(
-    name: '',
-    phoneContact: '',
-    city: '',
-    addressLine: '',
-    postalCode: '',
-    country: '', id: '',
-  );
+  var shippingDetails = ShippingDetails.empty();
 
   void setShippingDetails({required ShippingDetails details}) {
     shippingDetails = details;

@@ -120,7 +120,6 @@ class _ProductDetailState extends State<ProductDetail> {
                       SizedBox(
                         height: size.width / 2 + 100,
                         width: size.width,
-                        //todo repeted somewhere else
                         child: Image.network(
                           cartCtlr.selectedItem.product.imageUrl,
                           fit: BoxFit.fill,
@@ -177,6 +176,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               // quantity ,increment,and decrement buttons
                               Row(
                                 children: [
+                                  //todo 1/2, when product is only one, deleta add/sub btns
                                   //decrement button
                                   RoundCartButton(
                                     icon: Icons.remove,

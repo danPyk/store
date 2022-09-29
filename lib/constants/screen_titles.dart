@@ -1,7 +1,6 @@
 const signInScreenTitle = 'Welcome\n Back';
 
 const signUpScreenTitle = 'Create\nAccount';
-//todo remove unused
 const forgotPasswordScreenTtile = 'Forgot\nPasword';
 const orderHistoryScreenTitle = 'Order History';
 const profileScreenTitle = 'Profile';

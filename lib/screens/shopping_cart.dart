@@ -56,7 +56,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       //provide option to continue as guest or log in
       showModalBottomSheet(
         context: context,
-        builder: (BuildContext context) => const ShoppingCartBottomSheet(),
+        builder: (BuildContext context) => const ShoppingCartBottomSheet(message: 'Create accounte'),
       );
 
       _toggleIsProcessingCheckout();
@@ -266,6 +266,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 ),
                                               ),
                                             ),
+                                            //todo 2/2, when product is only one, deleta add/sub btns
+
                                             RoundCartButton(
                                               icon: Icons.add,
                                               width: size.width * 0.1,
@@ -345,7 +347,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         width: 15,
                       ),
 
-                      //checkoout button
+                      ///Checkout button
                       GestureDetector(
                         onTap: () {
                           if (!isProcessingCheckout) {

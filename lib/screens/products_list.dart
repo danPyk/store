@@ -25,9 +25,7 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   final _textEditingController = TextEditingController();
-  //todo
-   int? _categorySelectedIndex;
-   //todo might changed
+   late int _categorySelectedIndex;
   late final ProductController _productController;
   var _cartController;
   var _categoryController;
@@ -201,7 +199,7 @@ class _ProductListState extends State<ProductList> {
                           category: cateogoryCtlr.categoryList[index].category,
                           categoryIndex: index,
                           //todo
-                          categorySelectedIndex: _categorySelectedIndex!,
+                          categorySelectedIndex: _categorySelectedIndex,
                           onTapped: () {
                             setState(() {
                               _categorySelectedIndex = index;
@@ -229,7 +227,7 @@ class _ProductListState extends State<ProductList> {
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey[200]!,
                         highlightColor: Colors.grey[400]!,
-                        child:  ProductListSkeleton(),
+                        child:  const ProductListSkeleton(),
                       ),
                     );
                   }

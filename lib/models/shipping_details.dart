@@ -17,6 +17,15 @@ class ShippingDetails {
   String postalCode;
   String country;
 
+  factory ShippingDetails.empty() =>
+      ShippingDetails(id: '',
+          name: 'name',
+          phoneContact: 'phoneContact',
+          addressLine: 'addressLine',
+          city: 'city',
+          postalCode: 'postalCode',
+          country: 'country');
+
   factory ShippingDetails.fromJson(Map<String, dynamic> json) =>
       ShippingDetails(
         id: json["id"],
@@ -28,7 +37,8 @@ class ShippingDetails {
         country: json["country"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "id": id,
         "name": name,
         "phoneContact": phoneContact,

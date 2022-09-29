@@ -3,9 +3,9 @@ import 'package:store/screens/shipping.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingCartBottomSheet extends StatelessWidget {
-  final String? message;
+  final String message;
   const ShoppingCartBottomSheet({
-     this.message,
+     required this.message,
     Key? key,
   }) : super(key: key);
 
@@ -21,7 +21,7 @@ class ShoppingCartBottomSheet extends StatelessWidget {
             height: 20,
           ),
           Text(
-            message!,
+            message,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),

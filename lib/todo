@@ -1,0 +1,6 @@
+todo:
+1. user auth mongo/user
+1.5. storing photos in mongo, not url
+2.admin panel?
+3.mecenat galeria i porzyjmowanie innych? - do przemyuslenia.
+4. get rid of all globalkeys

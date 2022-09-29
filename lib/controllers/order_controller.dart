@@ -17,8 +17,7 @@ class OrderController extends ChangeNotifier {
   var _shippingCost;
 
   var _tax;
-//todo might
-  late Order _singleOrder;
+   Order _singleOrder = Order.empty();
 
   var _orders = <Order>[];
 
@@ -65,8 +64,8 @@ class OrderController extends ChangeNotifier {
       List<CartItem> cart,
       GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
-      //todo
-      var userType = userId != null ? userTypeRegistered : userTypeGuest;
+      //todo maybe
+      var userType = userId.isNotEmpty ? userTypeRegistered : userTypeGuest;
 
       var order = Order(
         shippingDetails: shippingDetails,

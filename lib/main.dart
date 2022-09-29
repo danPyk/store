@@ -1,4 +1,6 @@
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart';
+import 'package:store/.env.dart';
 import 'package:store/controllers/activity_tracker_controller.dart';
 import 'package:store/controllers/cart_controller.dart';
 import 'package:store/controllers/category_controller.dart';
@@ -7,7 +9,7 @@ import 'package:store/controllers/product_controller.dart';
 import 'package:store/controllers/shipping_controller.dart';
 import 'package:store/screens/auth_screen.dart';
 import 'package:store/screens/order_history.dart';
-import 'package:store/screens/payment_method.dart';
+import 'package:store/screens/payment_method.dart' as pm;
 import 'package:store/screens/product_detail.dart';
 import 'package:store/screens/products_list.dart';
 import 'package:store/screens/profile.dart';
@@ -23,6 +25,7 @@ import 'package:store/services/product_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //TODO add different orientation
+  Stripe.publishableKey = stripePublishableKey;
 
 
   SystemChrome.setPreferredOrientations(
@@ -62,16 +65,16 @@ class Main extends StatelessWidget {
         ),
         initialRoute: ProductList.id,
         routes: {
-          ProductList.id: (context) => ProductList(),
-          ShoppingCart.id: (context) => ShoppingCart(),
-          ProductDetail.id: (context) => ProductDetail(),
-          Shipping.id: (context) => Shipping(),
-          PaymentMethod.id: (context) => PaymentMethod(),
+          ProductList.id: (context) => const ProductList(),
+          ShoppingCart.id: (context) => const ShoppingCart(),
+          ProductDetail.id: (context) => const ProductDetail(),
+          Shipping.id: (context) => const Shipping(),
+          pm.PaymentMethod.id: (context) => const pm.PaymentMethod(),
           Thanks.id: (context) => Thanks(),
-          SingleOrder.id: (context) => SingleOrder(),
-          AuthScreen.id: (context) => AuthScreen(),
-          OrderHistory.id: (context) => OrderHistory(),
-          Profile.id: (context) => Profile()
+          SingleOrder.id: (context) => const SingleOrder(),
+          AuthScreen.id: (context) => const AuthScreen(),
+          OrderHistory.id: (context) => const OrderHistory(),
+          Profile.id: (context) => const Profile()
         },
       ),
     );

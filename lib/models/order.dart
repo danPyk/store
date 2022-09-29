@@ -15,7 +15,7 @@ class Order {
   Order({
     this.userId,
     required this.dateOrdered,
-     this.id,
+    this.id,
     required this.shippingDetails,
     required this.shippingCost,
     required this.tax,
@@ -24,8 +24,19 @@ class Order {
     required this.paymentMethod,
     required this.userType,
     required this.cartItems,
-     this.v,
+    this.v,
   });
+
+  factory Order.empty() => Order(
+      dateOrdered: DateTime.now(),
+      shippingDetails: ShippingDetails.empty(),
+      shippingCost: '0',
+      tax: '23',
+      total: '0',
+      totalItemPrice: '0',
+      paymentMethod: 'payment_method_test',
+      userType: 'userType_test',
+      cartItems: List.empty());
 
   dynamic userId;
   DateTime dateOrdered;

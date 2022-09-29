@@ -13,7 +13,6 @@ class CartItem {
   int quantity;
 
   CartItem({required this.product, required this.quantity});
-//todo category product
   factory CartItem.empty() => CartItem(product: Product.empty(), quantity: 0);
 
   Map<String, dynamic> toJson() => {
