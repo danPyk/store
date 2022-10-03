@@ -1,6 +1,12 @@
-todo:
+todo server:
 1. user auth mongo/user
 1.5. storing photos in mongo, not url
+5. server https secure
+
+
+
 2.admin panel?
-3.mecenat galeria i porzyjmowanie innych? - do przemyuslenia.
+
+todo later
 4. get rid of all globalkeys
+3.mecenat galeria i porzyjmowanie innych? - do przemyuslenia.

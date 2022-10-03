@@ -8,3 +8,5 @@ const singleOrderScreenId = 'SingleOrderScreen';
 const authScreenId = 'AuthScreen';
 const orderHistoryScreenId = 'OrderHistoryScreen';
 const profileScreenId = 'ProfileScreen';
+const exampleScreenId = 'ExampleScreen';
+const stripPaymentId = 'StripPaymentId';
