@@ -1,13 +1,11 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
-//todo make static with getit?
+@injectable
 class CartService {
   //todo might
-
-  CartService();
-
 
 
    Map<String, String> headers = {'Content-Type': 'application/json'};

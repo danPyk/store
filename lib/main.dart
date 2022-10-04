@@ -7,6 +7,7 @@ import 'package:store/controllers/category_controller.dart';
 import 'package:store/controllers/order_controller.dart';
 import 'package:store/controllers/product_controller.dart';
 import 'package:store/controllers/shipping_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/screens/STRIPE_PAYMENT.dart';
 import 'package:store/screens/auth_screen.dart';
 import 'package:store/screens/order_history.dart';
@@ -25,10 +26,12 @@ import 'package:store/screensStripe/screens.dart';
 import 'package:store/services/product_service.dart';
 
 void main() async {
+  configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
   //TODO add different orientation
   Stripe.publishableKey = stripePublishableKey;
   await Stripe.instance.applySettings();
+  
 
 
   SystemChrome.setPreferredOrientations(
@@ -64,7 +67,7 @@ class Main extends StatelessWidget {
         title: 'Ecommerce app',
         theme: exampleAppTheme,
 
-        initialRoute: StripPayment.id,
+        initialRoute: ProductList.id,
         routes: {
           ProductList.id: (context) => const ProductList(),
           ShoppingCart.id: (context) => const ShoppingCart(),

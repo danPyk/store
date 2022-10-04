@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:store/controllers/error_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/services/category_service.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ import '../models/category.dart';
 
 
 class CategoryController extends ChangeNotifier {
-  final _categoryService = CategoryService();
+  final _categoryService = CategoryService(httpClient: getIt());
 
   var _isLoadingCategories = true;
 

@@ -3,8 +3,10 @@ import 'dart:io';
 
 import 'package:store/controllers/auth_controller.dart';
 import 'package:store/controllers/error_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/models/cart_item.dart';
 import 'package:store/models/product.dart';
+import 'package:store/services/auth_service.dart';
 import 'package:store/services/cart_service.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,7 @@ class CartController extends ChangeNotifier {
 
   CartItem _selectedItem = CartItem.empty();
 
-  final _authController = AuthController();
+  final _authController = AuthController(getIt.call<AuthService>());
 
    final  _cartService = CartService();
 

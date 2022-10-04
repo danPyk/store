@@ -3,6 +3,8 @@ import 'package:store/constants/screen_titles.dart';
 import 'package:store/constants/tasks.dart';
 import 'package:store/controllers/auth_controller.dart';
 import 'package:store/controllers/order_controller.dart';
+import 'package:store/injection.dart';
+import 'package:store/services/auth_service.dart';
 import 'package:store/widgets/guest_user_drawer_widget.dart';
 import 'package:store/widgets/no_order_history_content.dart';
 import 'package:store/widgets/order_history_item.dart';
@@ -25,7 +27,7 @@ class OrderHistoryState extends State<OrderHistory> {
   @override
   void initState() {
     super.initState();
-    _authController = AuthController();
+    _authController = AuthController(getIt.call<AuthService>());
     _orderController = Provider.of<OrderController>(context, listen: false);
   }
 

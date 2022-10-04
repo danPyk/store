@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:store/controllers/error_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/models/product.dart';
 import 'package:store/services/product_service.dart';
 import 'dart:convert';
@@ -9,7 +10,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class ProductController extends ChangeNotifier {
-  final _productService = ProductService();
+  final _productService = getIt.call<ProductService>();
 
   List<Product> _productList = [];
 

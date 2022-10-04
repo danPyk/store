@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_braintree/flutter_braintree.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class PayPalService {
   static const String tokenizationKey = 'sandbox_9qqht4sx_2c34stzd8dh7rzxb';
 

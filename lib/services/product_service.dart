@@ -1,11 +1,12 @@
+import 'package:injectable/injectable.dart';
 import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
 import 'package:store/constants/error/excpetions.dart';
 
+@injectable
 class ProductService {
-  ProductService();
 
-  static var httpClient = http.Client();
+
 
 //todo LATER fullfill status codes
   Future<http.Response> getAllProducts() async {

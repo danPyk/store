@@ -6,7 +6,9 @@ import 'package:store/controllers/cart_controller.dart';
 import 'package:store/controllers/error_controller.dart';
 import 'package:store/controllers/order_controller.dart';
 import 'package:store/controllers/shipping_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/screens/thank_you.dart';
+import 'package:store/services/auth_service.dart';
 import 'package:store/services/paypal_service.dart';
 import 'package:store/widgets/dialog.dart';
 import 'package:store/widgets/global_snackbar.dart';
@@ -42,7 +44,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
   @override
   void initState() {
     super.initState();
-    _authController = AuthController();
+    _authController = AuthController(getIt.call<AuthService>());
     _cartController = Provider.of<CartController>(context, listen: false);
     _shippingController =
         Provider.of<ShippingController>(context, listen: false);

@@ -8,10 +8,10 @@
 .buildlog/
 .history
 .svn/
-migrate_working_dir/
-server/.env.example/
-server/tsconfig.json
-lib/configStripe.dart/
+migrate_working_dir
+server/.env.example
+server/tsconfig.json/
+lib/configStripe.dart
 lib/.env.dart/
 
 # IntelliJ related

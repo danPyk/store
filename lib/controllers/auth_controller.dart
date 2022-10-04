@@ -1,15 +1,20 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:injectable/injectable.dart';
 import 'package:store/controllers/error_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/services/auth_service.dart';
 import 'package:store/widgets/global_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+@injectable
 class AuthController {
   final _storage = const FlutterSecureStorage();
-  final _authService = AuthService();
+  final AuthService _authService;
+
+  AuthController(this._authService);
 
   Future<void> saveUserDataAndLoginStatus(
     String userId,

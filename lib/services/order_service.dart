@@ -1,18 +1,15 @@
+import 'package:injectable/injectable.dart';
 import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
+import 'package:store/injection.dart';
 
+@injectable
 class OrderService {
-  static late OrderService _orderService;
-
-  OrderService._internal() {
-    _orderService = this;
-  }
-//todo?
-  factory OrderService() => _orderService ?? OrderService._internal();
+  OrderService({required this.httpClient});
 
   Map<String, String> headers = {'Content-Type': 'application/json'};
 
-  static var httpClient = http.Client();
+  final http.Client httpClient ;
 
   Future getShippingCost(String country) async {
     //can be used to fetch shipping cost for a particular place from API.

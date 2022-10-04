@@ -3,16 +3,19 @@ import 'dart:io';
 import 'package:store/constants/payment.dart';
 import 'package:store/controllers/auth_controller.dart';
 import 'package:store/controllers/error_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/models/cart_item.dart';
 import 'package:store/models/order.dart';
 import 'package:store/models/shipping_details.dart';
 import 'package:store/services/order_service.dart';
 import 'package:flutter/material.dart';
 
-class OrderController extends ChangeNotifier {
-  late final _orderService = OrderService();
+import '../services/auth_service.dart';
 
-  final _authContoller = AuthController();
+class OrderController extends ChangeNotifier {
+  late final _orderService = OrderService(httpClient: getIt());
+
+  final _authContoller = AuthController(getIt.call<AuthService>());
 
   var _shippingCost;
 

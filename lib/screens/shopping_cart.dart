@@ -3,9 +3,11 @@ import 'package:store/constants/screen_ids.dart';
 import 'package:store/constants/screen_titles.dart';
 import 'package:store/controllers/auth_controller.dart';
 import 'package:store/controllers/cart_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/models/cart_item.dart';
 import 'package:store/screens/products_list.dart';
 import 'package:store/screens/shipping.dart';
+import 'package:store/services/auth_service.dart';
 import 'package:store/widgets/cart_button.dart';
 import 'package:store/widgets/round_cart_button.dart';
 import 'package:store/widgets/shopping_cart_bottom_sheet.dart';
@@ -32,7 +34,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void initState() {
     super.initState();
     _cartController = Provider.of<CartController>(context, listen: false);
-    _authController = AuthController();
+    _authController = AuthController(getIt.call<AuthService>());
   }
 
   _handleItemQuantityIncrease(CartItem cartItem) {

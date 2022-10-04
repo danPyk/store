@@ -6,9 +6,11 @@ import 'package:store/constants/screen_titles.dart';
 import 'package:store/constants/tasks.dart';
 import 'package:store/controllers/activity_tracker_controller.dart';
 import 'package:store/controllers/auth_controller.dart';
+import 'package:store/injection.dart';
 import 'package:store/screens/order_history.dart';
 import 'package:store/screens/profile.dart';
 import 'package:store/screens/shipping.dart';
+import 'package:store/services/auth_service.dart';
 import 'package:store/utils/validator.dart';
 import 'package:store/widgets/round_icon_button.dart';
 import 'package:store/widgets/underlined_text..dart';
@@ -45,7 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    _authController = AuthController();
+    _authController = AuthController(getIt.call<AuthService>());
   }
 
   @override

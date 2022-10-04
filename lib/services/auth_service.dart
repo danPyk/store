@@ -1,20 +1,25 @@
 import 'dart:convert';
 
 import 'package:store/application.properties/app_properties.dart';
+import 'package:store/injection.dart';
 import 'package:store/models/authdata.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
+@singleton
 class AuthService {
+
+  AuthService({required this.httpClient});
   //todo
-  static AuthService? _authService;
 
-  AuthService._internal() {
-    _authService = this;
+     final http.Client httpClient;
+
+  @disposeMethod
+  //todo LATER every servic dispos?
+  void dispose(){
+
+    // logic to dispose instance
   }
-
-  factory AuthService() => _authService ?? AuthService._internal();
-
-  static var httpClient = http.Client();
 
   Map<String, String> headers = {'Content-Type': 'application/json'};
 

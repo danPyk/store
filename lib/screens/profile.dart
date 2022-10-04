@@ -8,6 +8,9 @@ import 'package:store/widgets/dialog.dart';
 import 'package:store/widgets/guest_user_drawer_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../injection.dart';
+import '../services/auth_service.dart';
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
   static String id = profileScreenId;
@@ -27,7 +30,7 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     super.initState();
-    _authController = AuthController();
+    _authController = AuthController(getIt.call<AuthService>());
   }
 
   Future<bool> _getTokenValidity() async {
