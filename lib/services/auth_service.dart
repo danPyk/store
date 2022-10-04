@@ -42,9 +42,10 @@ class AuthService {
     String password,
   ) async {
     var authData = AuthData(name: '', email: email, password: password);
+    Uri uri = Uri.parse(AppProperties.signInUrl);
 
     return await http.post(
-      Uri.parse(AppProperties.signUpUrl),
+      uri,
       body: json.encode(authData.toJson()),
       headers: headers,
     );

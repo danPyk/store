@@ -34,12 +34,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
   var totalItemPrice;
 
-  var tax;
+  double tax = 23.0;
 
   var shippingCost;
 
-  var total;
-  var size;
+  double total = 0.0;
 
   @override
   void initState() {
@@ -50,9 +49,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         Provider.of<ShippingController>(context, listen: false);
     _orderController = Provider.of<OrderController>(context, listen: false);
 
-     size = MediaQuery
-        .of(context)
-        .size;
+
 
     totalItemPrice = _cartController.cart.fold(
         0,
@@ -319,9 +316,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     height: 10,
                   ),
 
-                  //paypal
+                  ///paypal
                   ButtonTheme(
-                    minWidth: size.width,
+                    minWidth: MediaQuery.of(context).size.width,
                     child: OutlinedButton(
 
                       onPressed: () async {
@@ -385,7 +382,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       children: const [
                         Icon(
                           Icons.credit_card,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                         SizedBox(
                           width: 10,

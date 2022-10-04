@@ -40,7 +40,7 @@ class _ProfileState extends State<Profile> {
   Future<List<String?>?> _getLoginStatus() async {
     final List<String?> result =
         await _authController.getUserDataAndLoginStatus();
-    if (result[1] == null) {
+    if (result[1] != null) {
       return result;
     } else {
       return null;
@@ -81,13 +81,14 @@ class _ProfileState extends State<Profile> {
                   );
                 }
 //tODO DEFINIETLY
-                List<Object?>? isLoggedInFlag = snapshot.data![1][1];
-                bool isTokenValid = snapshot.data![0] as bool;
-                String? email = snapshot.data![1][1];
-                String? name = snapshot.data[1][1];
+                bool? isTokenValid = snapshot.data?[0] as bool?;
+                String?  isLoggedInFlag = snapshot.data?[1]?[1];
+                String? email = snapshot.data?[1]?[3];
+                String? name = snapshot.data?[1]?[4];
+
 
                 //when user is not signed in
-                if (isLoggedInFlag == '0') {
+                if (isLoggedInFlag == null || isLoggedInFlag == '0') {
                   return const GuestUserDrawerWidget(
                     message: 'Sign in to see profile',
                     currentTask: VIEWING_PROFILE,
@@ -95,7 +96,7 @@ class _ProfileState extends State<Profile> {
                 }
 
                 //when user token has expired
-                if (!isTokenValid) {
+                if (!isTokenValid!) {
                   return const GuestUserDrawerWidget(
                     message: 'Session expired. Sign in to see profile',
                     currentTask: VIEWING_PROFILE,
@@ -230,7 +231,7 @@ class _ProfileState extends State<Profile> {
                           ),
 
                           const SizedBox(height: 10),
-                          //logout button
+                          ///LOGUT BTN
                           OutlinedButton(
                             onPressed: () {
                               _handleSignOutCall();
@@ -238,7 +239,7 @@ class _ProfileState extends State<Profile> {
                             child: const Text(
                               'Sign out',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 18,
                               ),
                             ),
@@ -391,7 +392,7 @@ class _ProfileState extends State<Profile> {
               child: const Text(
                 'Confirm sign out',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 18,
                 ),
               ),

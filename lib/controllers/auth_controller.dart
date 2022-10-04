@@ -9,6 +9,8 @@ import 'package:store/widgets/global_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+//todo add validation if user exist
+
 @injectable
 class AuthController {
   final _storage = const FlutterSecureStorage();
@@ -30,7 +32,7 @@ class AuthController {
     await _storage.write(key: 'name', value: name);
   }
 
-  Future<List<String?>>getUserDataAndLoginStatus() async {
+  Future<List<String?>> getUserDataAndLoginStatus() async {
     String? userId = await _storage.read(key: 'UserId');
     String? isLoggedFlag = await _storage.read(key: 'IsLoggedFlag');
     String? token = await _storage.read(key: 'jwt');
@@ -92,10 +94,10 @@ class AuthController {
 
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
-        var token = jsonResponse['data']['token'];
-        var userId = jsonResponse['data']['user']['id'];
-        var email = jsonResponse['data']['user']['email'];
-        var name = jsonResponse['data']['user']['name'];
+        var token = jsonResponse['token'];
+        var userId = jsonResponse['user']['id'];
+        var email = jsonResponse['user']['email'];
+        var name = jsonResponse['user']['name'];
 
         await saveUserDataAndLoginStatus(userId, '1', token, email, name);
         return true;
@@ -124,14 +126,18 @@ class AuthController {
 
     if (token == null) {
       return false;
-    }
-    var response = await _authService.checkTokenExpiry(token);
-
-    if (response.statusCode == 200) {
-      return true;
     } else {
-      return false;
+      return true;
     }
+
+    //todo TOKEN
+    // var response = await _authService.checkTokenExpiry(token);
+    //
+    // if (response.statusCode == 200) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   Future<bool> changeName(

@@ -35,8 +35,14 @@ class OrderHistoryState extends State<OrderHistory> {
     return await _authController.isTokenValid();
   }
 
-  Future<List<String>> getLoginStatus() async {
-    return await _authController.getUserDataAndLoginStatus();
+  Future<List<String?>?> getLoginStatus() async {
+    final List<String?> result =
+    await _authController.getUserDataAndLoginStatus();
+    if (result[1] == null) {
+      return result;
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -71,16 +77,17 @@ class OrderHistoryState extends State<OrderHistory> {
                   );
                 }
 //todo might
-                String isLoggedInFlag = snapshot.data![1] as String;
-                bool isTokenValid = snapshot.data![0] as bool;
+                Object? isLoggedInFlag = snapshot.data?[1] ;
+                bool isTokenValid = snapshot.data?[0] as bool;
 
                 //when user is not signed in
-                if (isLoggedInFlag.isNotEmpty || isLoggedInFlag == '0') {
-                  return const GuestUserDrawerWidget(
-                    message: 'Sign in to see order history',
-                    currentTask: VIEWING_ORDER_HISTORY,
-                  );
-                }
+                //todo
+                // if (isLoggedInFlag?.isNotEmpty || isLoggedInFlag == '0') {
+                //   return const GuestUserDrawerWidget(
+                //     message: 'Sign in to see order history',
+                //     currentTask: VIEWING_ORDER_HISTORY,
+                //   );
+                // }
 
                 //when user token has expired
                 if (!isTokenValid) {

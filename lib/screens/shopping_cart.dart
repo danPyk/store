@@ -23,6 +23,7 @@ class ShoppingCart extends StatefulWidget {
   _ShoppingCartState createState() => _ShoppingCartState();
 }
 
+//todo LATER add timeout
 class _ShoppingCartState extends State<ShoppingCart> {
   final double _rightMargin = 10;
   var _cartController;

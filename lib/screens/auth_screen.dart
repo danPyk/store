@@ -41,7 +41,7 @@ class _AuthScreenState extends State<AuthScreen> {
   String _password = '';
   String _name = '';
 
-  var _authController;
+  late final AuthController _authController;
 
   var _progressDialog;
 
@@ -140,7 +140,7 @@ class _AuthScreenState extends State<AuthScreen> {
           height: 15,
         ),
         TextFormField(
-          initialValue: 'password',
+          initialValue: 'aaaaaa',
 
           decoration: const InputDecoration(
             labelText: "aaaaaa",

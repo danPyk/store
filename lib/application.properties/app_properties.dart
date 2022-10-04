@@ -25,7 +25,7 @@ class AppProperties {
 
   static String signUpUrl = '$_baseApiUrl/people/';
 
-  static String signInUrl = '$_baseApiUrl/people/signin';
+  static String signInUrl = '$_baseApiUrl/people/signin/';
 
   static String changenameUrl = '$_baseApiUrl/people/updatename/';
 
