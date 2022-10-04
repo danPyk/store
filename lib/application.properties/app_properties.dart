@@ -15,19 +15,21 @@ class AppProperties {
 
   static String payPalRequestUrl = '$_baseApiUrl/cart/braintree/paypalpayment/';
 
-  static String signUpUrl = '$_baseApiUrl/users/signup';
+  static String getOrdersUrl = '$_baseApiUrl/cart/orders/user/';
 
-  static String signInUrl = '$_baseApiUrl/users/signin';
-
-  static String checkTokenExpiryUrl = '$_baseApiUrl/users/checktokenexpiry';
+  static String checkTokenExpiryUrl = '$_baseApiUrl/people/checktokenexpiry';
 
   static String cartUrl = '$_baseApiUrl/cart/';
 
-  static String getOrdersUrl = '$_baseApiUrl/cart/orders/user/';
+  ///PEOPLE
 
-  static String changenameUrl = '$_baseApiUrl/users/updatename/';
+  static String signUpUrl = '$_baseApiUrl/people/';
 
-  static String changeMailUrl = '$_baseApiUrl/users/updatemail/';
+  static String signInUrl = '$_baseApiUrl/people/signin';
 
-  static String forgotPasswordUrl = '$_baseApiUrl/users/forgotpassword';
+  static String changenameUrl = '$_baseApiUrl/people/updatename/';
+
+  static String changeMailUrl = '$_baseApiUrl/people/updatemail/';
+
+  static String forgotPasswordUrl = '$_baseApiUrl/people/forgotpassword';
 }

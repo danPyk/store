@@ -52,13 +52,13 @@ class AuthController {
     try {
       var response =
           await _authService.emailNameAndPasswordSignUp(name, email, password);
-
-      if (response.statusCode == 201) {
+//todo change to 201
+      if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
-        var token = jsonResponse['data']['token'];
-        var userId = jsonResponse['data']['user']['id'];
-        var email = jsonResponse['data']['user']['email'];
-        var name = jsonResponse['data']['user']['name'];
+        var token = jsonResponse['token'];
+        var userId = jsonResponse['user']['id'];
+        var email = jsonResponse['user']['email'];
+        var name = jsonResponse['user']['name'];
 
         await saveUserDataAndLoginStatus(userId, '1', token, email, name);
         return true;

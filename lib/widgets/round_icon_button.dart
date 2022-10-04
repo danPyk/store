@@ -31,7 +31,7 @@ class RoundIconButton extends StatelessWidget {
               iconData,
               color: iconColor,
             ),
-            onPressed: () => onPressed,
+            onPressed: () => onPressed(),
           ),
         ),
       ),

@@ -37,8 +37,14 @@ class _ProfileState extends State<Profile> {
     return await _authController.isTokenValid();
   }
 
-  Future<List<String>> _getLoginStatus() async {
-    return await _authController.getUserDataAndLoginStatus();
+  Future<List<String?>?> _getLoginStatus() async {
+    final List<String?> result =
+        await _authController.getUserDataAndLoginStatus();
+    if (result[1] == null) {
+      return result;
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -64,7 +70,7 @@ class _ProfileState extends State<Profile> {
           children: [
             FutureBuilder(
               future: Future.wait([_getTokenValidity(), _getLoginStatus()]),
-              builder: (context, AsyncSnapshot  snapshot) {
+              builder: (context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
                     child: Container(
@@ -75,13 +81,13 @@ class _ProfileState extends State<Profile> {
                   );
                 }
 //tODO DEFINIETLY
-                List<Object?> isLoggedInFlag = snapshot.data![1][1];
+                List<Object?>? isLoggedInFlag = snapshot.data![1][1];
                 bool isTokenValid = snapshot.data![0] as bool;
-                var email = snapshot.data![1]['email'];
-                var name = snapshot.data[1]['name'];
+                String? email = snapshot.data![1][1];
+                String? name = snapshot.data[1][1];
 
                 //when user is not signed in
-                if (isLoggedInFlag == null || isLoggedInFlag == '0') {
+                if (isLoggedInFlag == '0') {
                   return const GuestUserDrawerWidget(
                     message: 'Sign in to see profile',
                     currentTask: VIEWING_PROFILE,
@@ -129,7 +135,8 @@ class _ProfileState extends State<Profile> {
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
                       child: ListView(
                         shrinkWrap: true,
                         children: [
@@ -225,7 +232,6 @@ class _ProfileState extends State<Profile> {
                           const SizedBox(height: 10),
                           //logout button
                           OutlinedButton(
-
                             onPressed: () {
                               _handleSignOutCall();
                             },
@@ -321,7 +327,6 @@ class _ProfileState extends State<Profile> {
                       child: ButtonTheme(
                         minWidth: 100,
                         child: OutlinedButton(
-
                           onPressed: () async {
                             if (_saveNameFormKey.currentState!.validate()) {
                               _saveNameFormKey.currentState!.save();
@@ -377,7 +382,6 @@ class _ProfileState extends State<Profile> {
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: OutlinedButton(
-
               onPressed: () async {
                 _dialog.show();
                 await _authController.deleteUserDataAndLoginStatus();

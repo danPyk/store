@@ -17,7 +17,7 @@ import 'package:store/widgets/underlined_text..dart';
 
 import '../widgets/auth_screen_custom_painter.dart';
 import '../widgets/dialog.dart';
-
+//todo later add animation when changing pages, plus buttons
 class AuthScreen extends StatefulWidget {
   //used for navigation using named route
   static String id = authScreenId;
@@ -27,6 +27,7 @@ class AuthScreen extends StatefulWidget {
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
+//todo sometimes keyubord is not hiding
 
 enum AuthScreenId { SignIn_Screen, SignUp_Screen, ForgotPassword_Screen }
 
@@ -43,6 +44,11 @@ class _AuthScreenState extends State<AuthScreen> {
   var _authController;
 
   var _progressDialog;
+
+  late var nameController = TextEditingController(text: 'a');
+  late var emailController = TextEditingController(text: 'a@a.pl');
+  late var passwordController = TextEditingController(text: 'aaaaaa');
+
 
   @override
   void initState() {
@@ -109,7 +115,9 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         TextFormField(
           keyboardType: TextInputType.emailAddress,
+        initialValue: 'a@a.pl',
           decoration: const InputDecoration(
+
             labelText: "Email",
             hintText: "e.g johndoe@gmail.com",
             focusedBorder: UnderlineInputBorder(
@@ -132,8 +140,10 @@ class _AuthScreenState extends State<AuthScreen> {
           height: 15,
         ),
         TextFormField(
+          initialValue: 'password',
+
           decoration: const InputDecoration(
-            labelText: "Password",
+            labelText: "aaaaaa",
             hintText: "e.g secret",
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
@@ -157,6 +167,8 @@ class _AuthScreenState extends State<AuthScreen> {
     } else if (_authScreenId == AuthScreenId.SignUp_Screen) {
       return [
         TextFormField(
+          initialValue: 'name',
+
           decoration: const InputDecoration(
             labelText: "Name",
             hintText: "e.g John Doe",
@@ -177,6 +189,7 @@ class _AuthScreenState extends State<AuthScreen> {
           height: 10,
         ),
         TextFormField(
+          initialValue: 'a@a.pl',
           decoration: const InputDecoration(
             labelText: "Email",
             hintText: "e.g johndoe@gmail.com",
@@ -200,6 +213,8 @@ class _AuthScreenState extends State<AuthScreen> {
           height: 10,
         ),
         TextFormField(
+          initialValue: 'aaaaaa',
+
           decoration: const InputDecoration(
             labelText: "Password",
             hintText: "e.g secret",
@@ -216,7 +231,6 @@ class _AuthScreenState extends State<AuthScreen> {
             if (value.length < 6) {
               return "Too short";
             }
-            return null;
           },
         ),
         const SizedBox(
@@ -224,9 +238,10 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ];
     }
-    //forogt password input field
+    ///forogt password input field
     return [
       TextFormField(
+        initialValue: 'a@a.pl',
         decoration: const InputDecoration(
           labelText: "Email",
           hintText: "e.g johndoe@gmail.com",

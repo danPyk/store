@@ -37,7 +37,7 @@ class GuestUserDrawerWidget extends StatelessWidget {
               child: const Text(
                 'SIGN IN',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
