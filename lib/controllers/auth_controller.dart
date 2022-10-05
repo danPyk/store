@@ -62,7 +62,9 @@ class AuthController {
         var email = jsonResponse['user']['email'];
         var name = jsonResponse['user']['name'];
 
-        await saveUserDataAndLoginStatus(userId, '1', token, email, name);
+        String userIdParsed = userId;
+
+        await saveUserDataAndLoginStatus(userIdParsed, '1', token, email, name);
         return true;
       } else {
         ErrorController.showErrorFromApi(scaffoldKey, response);
@@ -99,7 +101,9 @@ class AuthController {
         var email = jsonResponse['user']['email'];
         var name = jsonResponse['user']['name'];
 
-        await saveUserDataAndLoginStatus(userId, '1', token, email, name);
+        String userIdParsed = userId;
+
+        await saveUserDataAndLoginStatus(userIdParsed, '1', token, email, name);
         return true;
       } else {
         ErrorController.showErrorFromApi(scaffoldKey, response);

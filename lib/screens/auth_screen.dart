@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store/constants/screen_ids.dart';
@@ -17,6 +16,7 @@ import 'package:store/widgets/underlined_text..dart';
 
 import '../widgets/auth_screen_custom_painter.dart';
 import '../widgets/dialog.dart';
+
 //todo later add animation when changing pages, plus buttons
 class AuthScreen extends StatefulWidget {
   //used for navigation using named route
@@ -49,7 +49,6 @@ class _AuthScreenState extends State<AuthScreen> {
   late var emailController = TextEditingController(text: 'a@a.pl');
   late var passwordController = TextEditingController(text: 'aaaaaa');
 
-
   @override
   void initState() {
     super.initState();
@@ -63,46 +62,50 @@ class _AuthScreenState extends State<AuthScreen> {
     var size = MediaQuery.of(context).size;
     var leftMargin = size.width / 10;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      body: SafeArea(
-        child: ListView(children: [
-          Column(
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    width: size.width,
-                    height: size.height / 2.5,
-                    child: CustomPaint(
-                      painter: AuthScreenCustomPainter(),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+        key: _scaffoldKey,
+        body: SafeArea(
+          child: ListView(children: [
+            Column(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      width: size.width,
+                      height: size.height / 2.5,
+                      child: CustomPaint(
+                        painter: AuthScreenCustomPainter(),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    child: Text(
-                      "$_screenTitle",
-                      style: const TextStyle(color: Colors.white, fontSize: 35),
+                    Positioned(
+                      child: Text(
+                        "$_screenTitle",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 35),
+                      ),
+                      top: size.height / 5,
+                      left: leftMargin,
                     ),
-                    top: size.height / 5,
-                    left: leftMargin,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: leftMargin, right: leftMargin),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: formTextFields() + formButtons(size),
-                  ),
+                  ],
                 ),
-              )
-            ],
-          ),
-        ]),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: leftMargin, right: leftMargin),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: formTextFields() + formButtons(size),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ]),
+        ),
       ),
     );
   }
@@ -115,9 +118,8 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         TextFormField(
           keyboardType: TextInputType.emailAddress,
-        initialValue: 'a@a.pl',
+          initialValue: 'a@a.pl',
           decoration: const InputDecoration(
-
             labelText: "Email",
             hintText: "e.g johndoe@gmail.com",
             focusedBorder: UnderlineInputBorder(
@@ -141,7 +143,6 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         TextFormField(
           initialValue: 'aaaaaa',
-
           decoration: const InputDecoration(
             labelText: "aaaaaa",
             hintText: "e.g secret",
@@ -168,7 +169,6 @@ class _AuthScreenState extends State<AuthScreen> {
       return [
         TextFormField(
           initialValue: 'name',
-
           decoration: const InputDecoration(
             labelText: "Name",
             hintText: "e.g John Doe",
@@ -214,7 +214,6 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         TextFormField(
           initialValue: 'aaaaaa',
-
           decoration: const InputDecoration(
             labelText: "Password",
             hintText: "e.g secret",
@@ -238,6 +237,7 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ];
     }
+
     ///forogt password input field
     return [
       TextFormField(
