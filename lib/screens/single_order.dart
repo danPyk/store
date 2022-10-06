@@ -216,7 +216,7 @@ class _SingleOrderState extends State<SingleOrder> {
                           child: Text(
                             context.watch<ActivityTracker>().currentTask == VIEWING_SINGLE_OLD_ORDER_HISTORY ? 'Thank you for the support' : "WE'LL CONTACT YOU SHORTLY",
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
 

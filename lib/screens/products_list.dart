@@ -99,7 +99,7 @@ class _ProductListState extends State<ProductList> {
                 badgeContent: Text(
                   '${context.watch<CartController>().cart.length}',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 child: const Icon(

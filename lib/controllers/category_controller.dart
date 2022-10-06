@@ -34,7 +34,6 @@ class CategoryController extends ChangeNotifier {
 
       Response response = await _categoryService.getCategories();
 
-      print(response.body);
       if (response.statusCode == 200) {
         List<String> splitedResponse = response.body.split(',') ;
         _categoryList =  createList(splitedResponse);

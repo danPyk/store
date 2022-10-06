@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:store/constants/payment.dart';
 import 'package:store/controllers/auth_controller.dart';
 import 'package:store/controllers/error_controller.dart';
@@ -17,12 +18,12 @@ class OrderController extends ChangeNotifier {
 
   final _authContoller = AuthController(getIt.call<AuthService>());
 
-  var _shippingCost;
+  double _shippingCost = 0.0;
 
-  var _tax;
-   Order _singleOrder = Order.empty();
+  double _tax = 0.0;
+  Order _singleOrder = Order.empty();
 
-  var _orders = <Order>[];
+  List<Order> _orders = [];
 
   bool _isLoadingOrders = true;
 
@@ -69,8 +70,10 @@ class OrderController extends ChangeNotifier {
     try {
       //todo maybe
       var userType = userId.isNotEmpty ? userTypeRegistered : userTypeGuest;
+      var orderIdSalt = generateSalt();
 
       var order = Order(
+        id: orderIdSalt,
         shippingDetails: shippingDetails,
         shippingCost: shippingCost,
         tax: tax,
@@ -87,8 +90,11 @@ class OrderController extends ChangeNotifier {
       var response = await _orderService.saveOrder(json.encode(orderToJson));
 
       if (response.statusCode == 200) {
+        //todo why send data to retrieve it later?
         var jsonD = json.decode(response.body);
-        _singleOrder = orderFromJson(json.encode(jsonD['data']));
+
+        //todo might id and v are null
+        _singleOrder = orderFromJson(json.encode(jsonD));
         _isProcessingOrder = false;
         notifyListeners();
       } else {
@@ -165,8 +171,12 @@ class OrderController extends ChangeNotifier {
       var response = await _orderService.getOrders(data[0]!, data[2]!);
       if (response.statusCode == 200) {
         var decodedResponse = json.decode(response.body);
-        _orders =
-            ordersFromJson(json.encode(decodedResponse['data']['orders']));
+        print(decodedResponse);
+
+        _orders = ordersFromJson(decodedResponse);
+
+        //_categoryList =  createList(splitedResponse);
+
         _isLoadingOrders = false;
         notifyListeners();
       } else {
@@ -197,4 +207,13 @@ class OrderController extends ChangeNotifier {
   void setSingleOrder(Order order) {
     _singleOrder = order;
   }
+}
+
+//todo
+String generateSalt() {
+  ///generate salt
+  var rand = Random();
+  var saltBytes = List<int>.generate(32, (_) => rand.nextInt(256));
+  String salt = base64.encode(saltBytes);
+  return salt;
 }

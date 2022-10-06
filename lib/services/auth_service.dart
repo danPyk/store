@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:store/application.properties/app_properties.dart';
-import 'package:store/injection.dart';
 import 'package:store/models/authdata.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
@@ -63,14 +62,16 @@ class AuthService {
   }
 
   Future changeName(String name, String userId, String jwtToken) async {
-    headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
+    //todo
+  //  headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
     var bodyObject = <String, String>{};
-    bodyObject.putIfAbsent('name', () => name);
+  Map<String, dynamic> map = {'name' : name};
+    String url = '${AppProperties.changenameUrl}$userId''/';
 
     return await http.patch(
-      Uri.parse('${AppProperties.changenameUrl}$userId'),
+      Uri.parse(url),
       headers: headers,
-      body: json.encode(bodyObject),
+      body: json.encode(map),
     );
   }
 

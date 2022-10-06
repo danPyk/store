@@ -31,12 +31,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   var _progressDialog;
 
-
-  var totalItemPrice;
+  var totalItemPrice ;
 
   double tax = 23.0;
 
-  var shippingCost;
+  double shippingCost = 0.0;
 
   double total = 0.0;
 
@@ -49,12 +48,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
         Provider.of<ShippingController>(context, listen: false);
     _orderController = Provider.of<OrderController>(context, listen: false);
 
-
-
     totalItemPrice = _cartController.cart.fold(
         0,
-            (previousValue, element) =>
-        previousValue + (element.product.price * element.quantity));
+        (previousValue, element) =>
+            previousValue + (element.product.price * element.quantity));
     tax == _orderController.tax;
     shippingCost = _orderController.shippingCost;
     total = totalItemPrice + tax + shippingCost;
@@ -63,13 +60,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
     _progressDialog = CDialog(context).dialog;
 
-
     //todo stripe
     //StripeService.init();
   }
 
-  _handleStripeSucessPayment(int shippingCost, int tax, int total,
-      String totalItemPrice) async {
+  _handleStripeSucessPayment(
+      double shippingCost, double tax, double total, String totalItemPrice) async {
     var data = await _authController.getUserDataAndLoginStatus();
 
     _orderController.registerOrderWithStripePayment(
@@ -94,7 +90,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
     _shippingController.reset();
   }
 
-
   _handleStripeFailurePayment() async {
     await _progressDialog.hide();
 
@@ -104,9 +99,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
       SnackBarType.Error,
     );
   }
+
 //todo
-  _handlePaypalBrainTree(String nonce, [int? shippingCost, int? tax, int? total,
-      String? totalItemPrice]) async {
+  _handlePaypalBrainTree(String nonce,
+      [int? shippingCost, int? tax, int? total, String? totalItemPrice]) async {
     var data = await _authController.getUserDataAndLoginStatus();
 
     _orderController.processOrderWithPaypal(
@@ -320,7 +316,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   ButtonTheme(
                     minWidth: MediaQuery.of(context).size.width,
                     child: OutlinedButton(
-
                       onPressed: () async {
                         await _progressDialog.show();
                         var nonce = await PayPalService.processPayment(
@@ -363,19 +358,18 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
                   //credit or debit button
                   OutlinedButton(
-
                     onPressed: () async {
                       await _progressDialog.show();
 //todo STRIPE
 
                       // var result = await StripeService.processPayment(
                       //     totalToString, 'usd');
-                      //
-                      // if (result.success) {
-                      //   _handleStripeSucessPayment();
-                      // } else {
-                      //   _handleStripeFailurePayment();
-                      // }
+//todo
+                      if (true) {
+                        _handleStripeSucessPayment(shippingCost, tax, total, totalItemPrice.toString());
+                      } else {
+                        _handleStripeFailurePayment();
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -390,7 +384,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         Text(
                           "Credit or Debit card",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                       ],

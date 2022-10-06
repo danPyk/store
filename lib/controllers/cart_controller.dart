@@ -27,7 +27,9 @@ class CartController extends ChangeNotifier {
 
   CartItem get selectedItem => _selectedItem;
 
+
   void setCurrentItem(Product product) async {
+
     _isLoadingProduct = true;
 
     var item = CartItem(product: product, quantity: 1);

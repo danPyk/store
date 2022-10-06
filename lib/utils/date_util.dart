@@ -1,7 +1,8 @@
 import 'package:intl/intl.dart';
 String getFormattedDate(String timestmapWithMillis) {
-  var dateTime =
-  DateFormat.EEEE("yyyy-MM-dd HH:mm:ss").parse(timestmapWithMillis);
+  final dateTime = DateTime.parse(timestmapWithMillis);
+
+  print(dateTime.second);
 
   return "${dateTime.day}-${dateTime.month}-${dateTime.year}  ${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
 }

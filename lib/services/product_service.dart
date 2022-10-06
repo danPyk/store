@@ -5,9 +5,6 @@ import 'package:store/constants/error/excpetions.dart';
 
 @injectable
 class ProductService {
-
-
-
 //todo LATER fullfill status codes
   Future<http.Response> getAllProducts() async {
     http.Response result = await http.get(Uri.parse(AppProperties.productUrl));
@@ -24,12 +21,12 @@ class ProductService {
   }
 
   Future<http.Response> getProductByCategory(String value) async {
-    if(value.contains(' ')){
+    if (value.contains(' ')) {
       value = value.replaceAll(' ', '+');
     }
     var result = value.trim();
     return await http
-        .get(  Uri.parse('${AppProperties.searchByCategoryUrl}$result/'));
+        .get(Uri.parse('${AppProperties.searchByCategoryUrl}$result/'));
   }
 
   Future<http.Response> getProductById(String id) async {

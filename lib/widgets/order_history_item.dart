@@ -22,6 +22,7 @@ class OrderHistoryItem extends StatelessWidget {
         leading: const Icon(Icons.info),
         trailing: const Icon(Icons.info_outlined),
         title: Text(
+
           'Order ${order.id}',
           style: const TextStyle(
             fontSize: 18,

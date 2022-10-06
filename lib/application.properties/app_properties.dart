@@ -3,6 +3,8 @@ import 'package:store/constants/api_config.dart';
 class AppProperties {
   static const String _baseApiUrl = ApiConfig.host;
 
+  ///PRODUCT
+
   static String productUrl = '$_baseApiUrl/product/';
 
   static String categoryUrl = '$_baseApiUrl/product/category/';
@@ -11,15 +13,17 @@ class AppProperties {
 
   static String searchByCategoryUrl = '$_baseApiUrl/product/category/';
 
-  static String saveOrderUrl = '$_baseApiUrl/cart/flutter/stripepayment';
+  ///ORDER
 
-  static String payPalRequestUrl = '$_baseApiUrl/cart/braintree/paypalpayment/';
+  static String saveOrderUrl = '$_baseApiUrl/order/stripepayment/';
 
-  static String getOrdersUrl = '$_baseApiUrl/cart/orders/user/';
+  static String payPalRequestUrl = '$_baseApiUrl/order//paypalpayment/';
+
+  static String getOrdersUrl = '$_baseApiUrl/order/';
 
   static String checkTokenExpiryUrl = '$_baseApiUrl/people/checktokenexpiry';
 
-  static String cartUrl = '$_baseApiUrl/cart/';
+  static String cartUrl = '$_baseApiUrl/order/';
 
   ///PEOPLE
 
@@ -31,5 +35,5 @@ class AppProperties {
 
   static String changeMailUrl = '$_baseApiUrl/people/updatemail/';
 
-  static String forgotPasswordUrl = '$_baseApiUrl/people/forgotpassword';
+  static String forgotPasswordUrl = '$_baseApiUrl/people/forgotpassword/';
 }

@@ -5,10 +5,15 @@ import 'package:store/models/shipping_details.dart';
 
 Order orderFromJson(String str) => Order.fromJson(json.decode(str));
 
-List<Order> ordersFromJson(String str) =>
-    List<Order>.from(json.decode(str).map((x) => Order.fromJson(x)));
+List<Order> ordersFromJson(dynamic str) =>
+    List<Order>.from(str.map<Order>((dynamic i ) => Order.fromJson(i)));
+
 
 String orderToJson(Order data) => json.encode(data.toJson());
+
+// List<Order> createList(List<String> list) => List<CategoryModel>.from(
+//     list.map<CategoryModel>((String i) => CategoryModel(category: i.replaceAll( RegExp(r'[^\w\s]+'),''))));
+//
 
 class Order {
   //todo 2 var made nullable
@@ -55,7 +60,7 @@ class Order {
         userId: jsonData["userId"],
         dateOrdered: DateTime.parse(jsonData["dateOrdered"]),
         id: jsonData["id"],
-        shippingDetails: ShippingDetails.fromJson(jsonData["shippingDetails"]),
+        shippingDetails: ShippingDetails.fromJson(jsonData?["shippingDetails"]),
         shippingCost: jsonData["shippingCost"],
         tax: jsonData["tax"],
         total: jsonData["total"],

@@ -349,7 +349,7 @@ class _ProfileState extends State<Profile> {
                           child: const Text(
                             'Save',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: 18,
                             ),
                           ),

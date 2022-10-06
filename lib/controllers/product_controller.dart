@@ -38,6 +38,7 @@ class ProductController extends ChangeNotifier {
         var responseJsonStr = json.decode(response.body);
 
         _productList = productFromJson(responseJsonStr);
+        print(productList);
         _isLoadingAllProducts = false;
 
         notifyListeners();
