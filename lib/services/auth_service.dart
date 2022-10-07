@@ -7,20 +7,17 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class AuthService {
-
   AuthService({required this.httpClient});
 
-     final http.Client httpClient;
+  final http.Client httpClient;
 
   @disposeMethod
   //todo LATER every servic dispos?
-  void dispose(){
-
+  void dispose() {
     // logic to dispose instance
   }
 
   Map<String, String> headers = {'Content-Type': 'application/json'};
-
 
   Future emailNameAndPasswordSignUp(
     String name,
@@ -60,15 +57,16 @@ class AuthService {
       headers: headers,
     );
   }
-  Future changeName(String name, String id, String jwtToken) async {
+//todo TOKEN deleted parameter
+  Future changeName(String newName, String oldName) async {
     //todo
-  //  headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
-  Map<String, String> map = {'name' : name};
-    String url = '${AppProperties.changenameUrl}';
+    //  headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
+    Map<String, String> map = {'name': newName};
+    String url = '${AppProperties.changenameUrl}$oldName';
 
     return await http.patch(
       Uri.parse(url),
-      headers: {'Application-Content': 'application/json'},
+      headers: headers,
       body: json.encode(map),
     );
   }

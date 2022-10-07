@@ -10,6 +10,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 //todo add validation if user exist
 
+//todo big fail: coll people have two fields name
+
 @injectable
 class AuthController {
   final _storage = const FlutterSecureStorage();
@@ -148,11 +150,11 @@ class AuthController {
     try {
       var data = await getUserDataAndLoginStatus();
 
-      var response = await _authService.changeName(name, data[0]!, data[2]!);
+      var response = await _authService.changeName(name, data[4]!);
 
       if (response.statusCode == 200) {
         var responseBody = json.decode(response.body);
-        await _storage.write(key: 'name', value: responseBody['data']['name']);
+        await _storage.write(key: 'name', value: responseBody['user']['name']);
 
         return true;
       } else {
