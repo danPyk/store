@@ -32,15 +32,15 @@ class _ApplePayScreenState extends State<ApplePayScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Apple Pay',
-      tags: ['iOS'],
-      padding: EdgeInsets.all(16),
+      tags: const ['iOS'],
+      padding: const EdgeInsets.all(16),
       children: [
         if (Stripe.instance.isApplePaySupported.value)
           ApplePayButton(
             onPressed: _handlePayPress,
           )
         else
-          Text('Apple Pay is not available in this device'),
+          const Text('Apple Pay is not available in this device'),
       ],
     );
   }
@@ -49,7 +49,7 @@ class _ApplePayScreenState extends State<ApplePayScreen> {
     try {
       // 1. Present Apple Pay sheet
       await Stripe.instance.presentApplePay(
-        ApplePayPresentParams(
+        const ApplePayPresentParams(
           cartItems: [
             ApplePayCartSummaryItem.immediate(
               label: 'Product Test',

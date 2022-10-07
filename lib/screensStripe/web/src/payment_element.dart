@@ -41,10 +41,10 @@ class _ThemeCardExampleState extends State<PaymentElementExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        title: const Text('Flutter App'),
       ),
       body: Column(
-        children: [
+        children: const [
           // Container(
           //   height: 150,
           //   alignment: Alignment.center,

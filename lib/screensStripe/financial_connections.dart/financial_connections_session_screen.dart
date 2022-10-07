@@ -65,7 +65,7 @@ class _FinancialConnectionsScreenState
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }
@@ -97,7 +97,7 @@ class _FinancialConnectionsScreenState
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }
@@ -108,8 +108,8 @@ class _FinancialConnectionsScreenState
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Financial connections',
-      tags: ['Financial connections'],
-      padding: EdgeInsets.all(16),
+      tags: const ['Financial connections'],
+      padding: const EdgeInsets.all(16),
       children: [
         LoadingButton(
           onPressed: () async {
@@ -124,8 +124,8 @@ class _FinancialConnectionsScreenState
           },
           text: 'Collect banktoken',
         ),
-        Divider(),
-        SizedBox(height: 20),
+        const Divider(),
+        const SizedBox(height: 20),
         ResponseCard(response: response),
       ],
     );

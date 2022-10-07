@@ -1,5 +1,4 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:http/http.dart';
 import 'package:store/.env.dart';
 import 'package:store/controllers/activity_tracker_controller.dart';
 import 'package:store/controllers/cart_controller.dart';
@@ -22,8 +21,6 @@ import 'package:store/screens/thank_you.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:store/screensStripe/screens.dart';
-import 'package:store/services/product_service.dart';
 
 void main() async {
   configureDependencies();
@@ -31,8 +28,6 @@ void main() async {
   //TODO add different orientation
   Stripe.publishableKey = stripePublishableKey;
   await Stripe.instance.applySettings();
-  
-
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -64,9 +59,8 @@ class Main extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Ecommerce app',
+        title: 'Sklep',
         theme: exampleAppTheme,
-
         initialRoute: ProductList.id,
         routes: {
           ProductList.id: (context) => const ProductList(),
@@ -79,17 +73,18 @@ class Main extends StatelessWidget {
           AuthScreen.id: (context) => const AuthScreen(),
           OrderHistory.id: (context) => const OrderHistory(),
           Profile.id: (context) => const Profile(),
-          StripPayment.id: (context) =>  const StripPayment(),
+          StripPayment.id: (context) => const StripPayment(),
         },
       ),
     );
   }
 }
+
 final exampleAppTheme = ThemeData(
-  colorScheme: ColorScheme.light(
+  colorScheme: const ColorScheme.light(
     primary: Color(0xff6058F7),
     secondary: Color(0xff6058F7),
   ),
   primaryColor: Colors.white,
-  appBarTheme: AppBarTheme(elevation: 1),
+  appBarTheme: const AppBarTheme(elevation: 1),
 );

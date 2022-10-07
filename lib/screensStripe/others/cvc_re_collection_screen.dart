@@ -22,33 +22,33 @@ class _CVCReCollectionScreenState extends State<CVCReCollectionScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Re-collect CVC',
-      tags: ['Card Payment'],
-      padding: EdgeInsets.all(16),
+      tags: const ['Card Payment'],
+      padding: const EdgeInsets.all(16),
       children: [
         TextFormField(
           initialValue: _email,
-          decoration: InputDecoration(hintText: 'Email', labelText: 'Email'),
+          decoration: const InputDecoration(hintText: 'Email', labelText: 'Email'),
           onChanged: (value) {
             setState(() {
               _email = value;
             });
           },
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         TextField(
-          decoration: InputDecoration(hintText: 'CVC', labelText: 'CVC'),
+          decoration: const InputDecoration(hintText: 'CVC', labelText: 'CVC'),
           onChanged: (value) {
             setState(() {
               _cvc = value;
             });
           },
         ),
-        SizedBox(height: 42),
+        const SizedBox(height: 42),
         LoadingButton(
           onPressed: _payAsynchronously,
           text: 'Pay with Webhook',
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         LoadingButton(
           onPressed: _paySynchronously,
           text: 'Pay Synchronously',
@@ -71,7 +71,7 @@ class _CVCReCollectionScreenState extends State<CVCReCollectionScreen> {
     }
 
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Success!: The payment was confirmed successfully!')));
+        .showSnackBar(const SnackBar(content: Text('Success!: The payment was confirmed successfully!')));
   }
 
   Future<void> _paySynchronously() async {
@@ -87,7 +87,7 @@ class _CVCReCollectionScreenState extends State<CVCReCollectionScreen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error code: ${paymentIntent['error']}')));
     } else if (paymentIntent['succeeded'] == true) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Success!: The payment was confirmed successfully!')));
+          .showSnackBar(const SnackBar(content: Text('Success!: The payment was confirmed successfully!')));
     } else {
       // Handle other statuses accordingly
       throw UnimplementedError();

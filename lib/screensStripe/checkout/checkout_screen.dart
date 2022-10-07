@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 //todo maybe this is final payment screen?
 
 class CheckoutScreenExample extends StatefulWidget {
-  CheckoutScreenExample({
+  const CheckoutScreenExample({
     Key? key,
   }) : super(key: key);
 
@@ -28,13 +28,13 @@ class _CheckoutScreenExample extends State<CheckoutScreenExample> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Checkout Page',
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       children: [
-        SizedBox(height: 120),
+        const SizedBox(height: 120),
         Center(
           child: ElevatedButton(
             onPressed: getCheckout,
-            child: Text('Open Checkout'),
+            child: const Text('Open Checkout'),
           ),
         )
       ],

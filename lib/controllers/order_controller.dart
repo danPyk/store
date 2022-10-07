@@ -16,7 +16,7 @@ import '../services/auth_service.dart';
 class OrderController extends ChangeNotifier {
   late final _orderService = OrderService(httpClient: getIt());
 
-  final _authContoller = AuthController(getIt.call<AuthService>());
+  final _authController = AuthController(getIt.call<AuthService>());
 
   double _shippingCost = 0.0;
 
@@ -167,7 +167,7 @@ class OrderController extends ChangeNotifier {
   void getOrders(GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
       _isLoadingOrders = true;
-      var data = await _authContoller.getUserDataAndLoginStatus();
+      var data = await _authController.getUserDataAndLoginStatus();
       var response = await _orderService.getOrders(data[0]!, data[2]!);
       if (response.statusCode == 200) {
         var decodedResponse = json.decode(response.body);
@@ -175,7 +175,6 @@ class OrderController extends ChangeNotifier {
 
         _orders = ordersFromJson(decodedResponse);
 
-        //_categoryList =  createList(splitedResponse);
 
         _isLoadingOrders = false;
         notifyListeners();

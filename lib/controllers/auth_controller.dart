@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:store/controllers/error_controller.dart';
-import 'package:store/injection.dart';
 import 'package:store/services/auth_service.dart';
 import 'package:store/widgets/global_snackbar.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +105,7 @@ class AuthController {
         await saveUserDataAndLoginStatus(userIdParsed, '1', token, email, name);
         return true;
       } else {
-        ErrorController.showErrorFromApi(scaffoldKey, response);
+        ErrorController.showErrorFromApi(scaffoldKey, response.toString());
         return false;
       }
     } on SocketException catch (_) {

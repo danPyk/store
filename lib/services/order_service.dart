@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:store/application.properties/app_properties.dart';
 import 'package:http/http.dart' as http;
-import 'package:store/injection.dart';
 
 @injectable
 class OrderService {
@@ -37,6 +36,7 @@ class OrderService {
   }
 
   Future<http.Response> getOrders(String id, String jwtToken) async {
+    //todo auth
    // headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
     return await httpClient.get(
         Uri.parse('${AppProperties.getOrdersUrl}$id''/'),

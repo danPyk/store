@@ -22,21 +22,21 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Payment Sheet',
-      tags: ['Single Step'],
+      tags: const ['Single Step'],
       children: [
         Stepper(
           controlsBuilder: emptyControlBuilder,
           currentStep: step,
           steps: [
             Step(
-              title: Text('Init payment'),
+              title: const Text('Init payment'),
               content: LoadingButton(
                 onPressed: initPaymentSheet,
                 text: 'Init payment sheet',
               ),
             ),
             Step(
-              title: Text('Confirm payment'),
+              title: const Text('Confirm payment'),
               content:
               LoadingButton(
                 onPressed: confirmPayment,
@@ -73,7 +73,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       final data = await _createTestPaymentSheet();
 
       // create some billingdetails
-      final billingDetails = BillingDetails(
+      const billingDetails = BillingDetails(
         name: 'Flutter Stripe',
         email: 'email@stripe.com',
         phone: '+48888000888',
@@ -97,15 +97,15 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
           customerId: data['customer'],
           customerEphemeralKeySecret: data['ephemeralKey'],
           // Extra params
-          applePay: PaymentSheetApplePay(
+          applePay: const PaymentSheetApplePay(
             merchantCountryCode: 'DE',
           ),
-          googlePay: PaymentSheetGooglePay(
+          googlePay: const PaymentSheetGooglePay(
             merchantCountryCode: 'DE',
             testEnv: true,
           ),
           style: ThemeMode.dark,
-          appearance: PaymentSheetAppearance(
+          appearance: const PaymentSheetAppearance(
             colors: PaymentSheetAppearanceColors(
               background: Colors.lightBlue,
               primary: Colors.blue,
@@ -150,7 +150,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Payment succesfully completed'),
         ),
       );
@@ -164,7 +164,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }

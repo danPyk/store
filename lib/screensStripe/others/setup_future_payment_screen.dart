@@ -32,10 +32,10 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
       title: 'Setup Future Payment',
       children: [
         Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: TextFormField(
             initialValue: _email,
-            decoration: InputDecoration(hintText: 'Email', labelText: 'Email'),
+            decoration: const InputDecoration(hintText: 'Email', labelText: 'Email'),
             onChanged: (value) {
               setState(() {
                 _email = value;
@@ -44,7 +44,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: CardField(
             onCardChanged: (card) {
               setState(() {
@@ -58,14 +58,14 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
           currentStep: step,
           steps: [
             Step(
-              title: Text('Save card'),
+              title: const Text('Save card'),
               content: LoadingButton(
                 onPressed: _card?.complete == true ? _handleSavePress : null,
                 text: 'Save',
               ),
             ),
             Step(
-              title: Text('Pay with saved card'),
+              title: const Text('Pay with saved card'),
               content: LoadingButton(
                 onPressed: _setupIntentResult != null
                     ? _handleOffSessionPayment
@@ -74,12 +74,12 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
               ),
             ),
             Step(
-              title: Text('[Extra] Recovery Flow - Authenticate payment'),
+              title: const Text('[Extra] Recovery Flow - Authenticate payment'),
               content: Column(
                 children: [
-                  Text(
+                  const Text(
                       'If the payment did not succeed. Notify your customer to return to your application to complete the payment. We recommend creating a recovery flow in your app that shows why the payment failed initially and lets your customer retry.'),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   LoadingButton(
                     onPressed: _retrievedPaymentIntent != null
                         ? _handleRecoveryFlow
@@ -93,7 +93,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
         ),
         if (_setupIntentResult != null)
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: ResponseCard(
               response: _setupIntentResult!.toJson().toPrettyString(),
             ),
@@ -111,7 +111,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
       final clientSecret = await _createSetupIntentOnBackend(_email);
 
       // 2. Gather customer billing information (ex. email)
-      final billingDetails = BillingDetails(
+      const billingDetails = BillingDetails(
         name: "Test User",
         email: 'email@stripe.com',
         phone: '+48888000888',
@@ -129,7 +129,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
 
       final setupIntentResult = await Stripe.instance.confirmSetupIntent(
         clientSecret,
-        PaymentMethodParams.card(
+        const PaymentMethodParams.card(
           paymentMethodData: PaymentMethodData(
             billingDetails: billingDetails,
           ),
@@ -137,7 +137,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
       );
       log('Setup Intent created $setupIntentResult');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(
             'Success: Setup intent created.',
           ),
@@ -165,7 +165,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
               'Error!: The payment could not be completed! ${res['error']}')));
       await _handleRetrievePaymentIntent(res['clientSecret']);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Success!: The payment was confirmed successfully!')));
       setState(() {
         step = 2;
@@ -182,9 +182,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
     final paymentIntent =
         await Stripe.instance.retrievePaymentIntent(clientSecret);
 
-    final paymentMethodId = paymentIntent.paymentMethodId == null
-        ? _setupIntentResult?.paymentMethodId
-        : paymentIntent.paymentMethodId;
+    final paymentMethodId = paymentIntent.paymentMethodId ?? _setupIntentResult?.paymentMethodId;
 
     setState(() {
       _retrievedPaymentIntent =
@@ -204,7 +202,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
         ),
       );
     }
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Success!: The payment was confirmed successfully!')));
   }
 

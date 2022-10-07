@@ -26,26 +26,26 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-                margin: EdgeInsets.all(16),
-                padding: EdgeInsets.all(12),
+                margin: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
+                child: const Text(
                     'If you don\'t want to or can\'t rely on the CardField you'
                     ' can use the dangerouslyUpdateCardDetails in combination with '
                     'your own card field implementation. \n\n'
                     'Please beware that this will potentially break PCI compliance: '
                     'https://stripe.com/docs/security/guide#validating-pci-compliance')),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
                   Expanded(
                     flex: 2,
                     child: TextField(
-                      decoration: InputDecoration(hintText: 'Number'),
+                      decoration: const InputDecoration(hintText: 'Number'),
                       onChanged: (number) {
                         setState(() {
                           _card = _card.copyWith(number: number);
@@ -58,7 +58,7 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     width: 80,
                     child: TextField(
-                      decoration: InputDecoration(hintText: 'Exp. Year'),
+                      decoration: const InputDecoration(hintText: 'Exp. Year'),
                       onChanged: (number) {
                         setState(() {
                           _card = _card.copyWith(
@@ -72,7 +72,7 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     width: 80,
                     child: TextField(
-                      decoration: InputDecoration(hintText: 'Exp. Month'),
+                      decoration: const InputDecoration(hintText: 'Exp. Month'),
                       onChanged: (number) {
                         setState(() {
                           _card = _card.copyWith(
@@ -86,7 +86,7 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     width: 80,
                     child: TextField(
-                      decoration: InputDecoration(hintText: 'CVC'),
+                      decoration: const InputDecoration(hintText: 'CVC'),
                       onChanged: (number) {
                         setState(() {
                           _card = _card.copyWith(cvc: number);
@@ -105,10 +105,10 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
                   _saveCard = value;
                 });
               },
-              title: Text('Save card during payment'),
+              title: const Text('Save card during payment'),
             ),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: LoadingButton(
                 onPressed: _handlePayPress,
                 text: 'Pay',
@@ -126,7 +126,7 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
     try {
       // 1. Gather customer billing information (ex. email)
 
-      final billingDetails = BillingDetails(
+      const billingDetails = BillingDetails(
         email: 'email@stripe.com',
         phone: '+48888000888',
         address: Address(
@@ -141,7 +141,7 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
 
       // 2. Create payment method
       final paymentMethod =
-          await Stripe.instance.createPaymentMethod(PaymentMethodParams.card(
+          await Stripe.instance.createPaymentMethod(const PaymentMethodParams.card(
         paymentMethodData: PaymentMethodData(
           billingDetails: billingDetails,
         ),
@@ -168,7 +168,7 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
           paymentIntentResult['requiresAction'] == null) {
         // Payment succedeed
 
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content:
                 Text('Success!: The payment was confirmed successfully!')));
         return;
@@ -203,7 +203,7 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${result['error']}')));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Success!: The payment was confirmed successfully!')));
     }
   }

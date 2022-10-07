@@ -11,7 +11,7 @@ class ResponseCard extends StatelessWidget {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -25,7 +25,7 @@ class ResponseCard extends StatelessWidget {
                       ?.withOpacity(0.5),
                 ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(response),
         ],
       ),

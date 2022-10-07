@@ -32,7 +32,7 @@ class AuthScreen extends StatefulWidget {
 enum AuthScreenId { SignIn_Screen, SignUp_Screen, ForgotPassword_Screen }
 
 class _AuthScreenState extends State<AuthScreen> {
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   var _screenTitle = signInScreenTitle;
   AuthScreenId _authScreenId = AuthScreenId.SignIn_Screen;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -72,7 +72,7 @@ class _AuthScreenState extends State<AuthScreen> {
               children: [
                 Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       width: size.width,
                       height: size.height / 2.5,
                       child: CustomPaint(
@@ -80,13 +80,13 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                     Positioned(
+                      top: size.height / 5,
+                      left: leftMargin,
                       child: Text(
-                        "$_screenTitle",
+                        _screenTitle,
                         style:
                             const TextStyle(color: Colors.white, fontSize: 35),
                       ),
-                      top: size.height / 5,
-                      left: leftMargin,
                     ),
                   ],
                 ),
@@ -109,7 +109,7 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
     );
   }
-
+//todo probably called every time
   List<Widget> formTextFields() {
     if (_authScreenId == AuthScreenId.SignIn_Screen) {
       return [
@@ -230,6 +230,7 @@ class _AuthScreenState extends State<AuthScreen> {
             if (value.length < 6) {
               return "Too short";
             }
+            return null;
           },
         ),
         const SizedBox(
@@ -241,7 +242,7 @@ class _AuthScreenState extends State<AuthScreen> {
     ///forogt password input field
     return [
       TextFormField(
-        initialValue: 'a@a.pl',
+        initialValue: 'c@c.pl',
         decoration: const InputDecoration(
           labelText: "Email",
           hintText: "e.g johndoe@gmail.com",

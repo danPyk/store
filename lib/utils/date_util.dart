@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 String getFormattedDate(String timestmapWithMillis) {
   final dateTime = DateTime.parse(timestmapWithMillis);
 

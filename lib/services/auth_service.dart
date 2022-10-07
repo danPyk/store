@@ -9,7 +9,6 @@ import 'package:injectable/injectable.dart';
 class AuthService {
 
   AuthService({required this.httpClient});
-  //todo
 
      final http.Client httpClient;
 
@@ -21,6 +20,7 @@ class AuthService {
   }
 
   Map<String, String> headers = {'Content-Type': 'application/json'};
+
 
   Future emailNameAndPasswordSignUp(
     String name,
@@ -60,17 +60,15 @@ class AuthService {
       headers: headers,
     );
   }
-
-  Future changeName(String name, String userId, String jwtToken) async {
+  Future changeName(String name, String id, String jwtToken) async {
     //todo
   //  headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
-    var bodyObject = <String, String>{};
-  Map<String, dynamic> map = {'name' : name};
-    String url = '${AppProperties.changenameUrl}$userId''/';
+  Map<String, String> map = {'name' : name};
+    String url = '${AppProperties.changenameUrl}';
 
     return await http.patch(
       Uri.parse(url),
-      headers: headers,
+      headers: {'Application-Content': 'application/json'},
       body: json.encode(map),
     );
   }

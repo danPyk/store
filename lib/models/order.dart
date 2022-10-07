@@ -60,7 +60,7 @@ class Order {
         userId: jsonData["userId"],
         dateOrdered: DateTime.parse(jsonData["dateOrdered"]),
         id: jsonData["id"],
-        shippingDetails: ShippingDetails.fromJson(jsonData?["shippingDetails"]),
+        shippingDetails: ShippingDetails.fromJson(jsonData["shippingDetails"]),
         shippingCost: jsonData["shippingCost"],
         tax: jsonData["tax"],
         total: jsonData["total"],

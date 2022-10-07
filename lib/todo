@@ -1,8 +1,10 @@
 todo server:
-1. user auth mongo/user
+INPROGRESS, add cache, inner check. user auth mongo/user
 1.5. storing photos in mongo, not url
+3.notification for user: web package send/sms/email.
+4.notification for admin about new orders - mobile app
 5. server https secure
-
+6. hid ip
 
 
 2.admin panel?

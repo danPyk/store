@@ -62,7 +62,7 @@ class _PayPalScreenState extends State<PayPalScreen> {
       final billingDetails = BillingDetails(
         // email is mandatory
         email: email,
-        address: Address(
+        address: const Address(
           city: 'Stockholm',
           country: 'SV',
           line1: 'Kungsgatan 1',
@@ -80,7 +80,7 @@ class _PayPalScreenState extends State<PayPalScreen> {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Payment succesfully completed'),
         ),
       );
@@ -94,7 +94,7 @@ class _PayPalScreenState extends State<PayPalScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }
@@ -105,17 +105,17 @@ class _PayPalScreenState extends State<PayPalScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'PayPal',
-      tags: ['Payment method'],
-      padding: EdgeInsets.all(16),
+      tags: const ['Payment method'],
+      padding: const EdgeInsets.all(16),
       children: [
         TextField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Email',
           ),
           controller: _emailController,
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         LoadingButton(

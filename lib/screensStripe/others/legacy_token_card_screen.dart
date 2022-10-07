@@ -20,7 +20,7 @@ class _LegacyTokenCardScreenState extends State<LegacyTokenCardScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Create token for card',
-      tags: ['Legacy'],
+      tags: const ['Legacy'],
       padding: const EdgeInsets.all(16),
       children: [
         CardField(
@@ -63,7 +63,7 @@ class _LegacyTokenCardScreenState extends State<LegacyTokenCardScreen> {
 
       // 2. Create payment method
       final tokenData =
-          await Stripe.instance.createToken(CreateTokenParams.card(
+          await Stripe.instance.createToken(const CreateTokenParams.card(
               params: CardTokenParams(
         address: address,
         currency: 'USD'
