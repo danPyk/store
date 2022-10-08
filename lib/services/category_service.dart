@@ -10,7 +10,7 @@ class CategoryService {
   //todo http
   final http.Client httpClient ;
 
-  Future getCategories() async {
+  Future<http.Response> getCategories() async {
     return await httpClient.get(Uri.parse(AppProperties.categoryUrl));
   }
 }

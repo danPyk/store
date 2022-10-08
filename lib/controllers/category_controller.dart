@@ -25,7 +25,7 @@ class CategoryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getAllCategories(GlobalKey<ScaffoldState> scaffoldKey) async {
+  Future<void> getAllCategories(GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
       _isLoadingCategories = true;
       //important when refresh indicator is called

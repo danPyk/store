@@ -70,26 +70,46 @@ class AuthService {
       body: json.encode(map),
     );
   }
-
-  Future changeEmail(String email, String userId, String jwtToken) async {
-    headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
-    var bodyObject = <String, String>{};
-    bodyObject.putIfAbsent('email', () => email);
+//todo token deleted
+  Future changeEmail(String newEmail, String oldEmail) async {
+    //TODO TOKEN
+    //headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
+    Map<String, String> bodyObject  = {'email' : newEmail};
 
     return await http.patch(
-      Uri.parse('${AppProperties.changeMailUrl}$userId'),
+      Uri.parse('${AppProperties.changeMailUrl}$oldEmail'),
       headers: headers,
       body: json.encode(bodyObject),
     );
   }
 
   Future forgotPassword(String email) async {
-    var bodyObject = <String, String>{};
-    bodyObject.putIfAbsent('email', () => email);
-    return await http.post(
+    Map<String, String> bodyObject  = {'email' : email};
+    return await http.patch(
       Uri.parse(AppProperties.forgotPasswordUrl),
       headers: headers,
       body: json.encode(bodyObject),
     );
   }
+  Future resetPassword(String email) async {
+    Map<String, String> bodyObject  = {'email' : email};
+    return await http.post(
+      Uri.parse(AppProperties.resetPasswordUrl),
+      headers: headers,
+      body: json.encode(bodyObject),
+    );
+  }
+
+  Future changePassword(String password, String email) async {
+    //TODO TOKEN
+    //headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
+    Map<String, String> bodyObject  = {'user': email, 'email' : password};
+
+    return await http.patch(
+      Uri.parse(AppProperties.changeMailUrl),
+      headers: headers,
+      body: json.encode(bodyObject),
+    );
+  }
+
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:http/http.dart' as http;
 import 'package:store/controllers/auth_controller.dart';
 import 'package:store/controllers/error_controller.dart';
 import 'package:store/injection.dart';
@@ -19,7 +20,7 @@ class CartController extends ChangeNotifier {
 
   final _authController = AuthController(getIt.call<AuthService>());
 
-   final  _cartService = CartService();
+  final _cartService = CartService();
 
   List<CartItem> get cart => _cart;
 
@@ -27,9 +28,7 @@ class CartController extends ChangeNotifier {
 
   CartItem get selectedItem => _selectedItem;
 
-
   void setCurrentItem(Product product) async {
-
     _isLoadingProduct = true;
 
     var item = CartItem(product: product, quantity: 1);
@@ -136,7 +135,7 @@ class CartController extends ChangeNotifier {
 
   saveCart(List<CartItem> cart, GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
-      for (var cartItem in cart)  {
+      for (var cartItem in cart) {
         var productId = cartItem.product.id;
         var quantity = cartItem.quantity.toString();
         var authData = await _authController.getUserDataAndLoginStatus();
@@ -159,11 +158,15 @@ class CartController extends ChangeNotifier {
   //can only be loaded if jwt token didn't expire
   getSavedCart() async {
     try {
-      var authData = await _authController.getUserDataAndLoginStatus();
-      var userId = authData[0];
-      var jwtToken = authData[2];
+      List<String?> authData =
+          await _authController.getUserDataAndLoginStatus();
+      String? userId = authData[0];
+      String? jwtToken = authData[2];
 
-      var response = await _cartService.getCart(userId!, jwtToken!);
+      var  response;
+      if (userId != null) {
+        response = await _cartService.getCart(userId, jwtToken!);
+      }
 
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
@@ -201,43 +204,43 @@ class CartController extends ChangeNotifier {
     }
   }
 
-  //REQUIRED IF YOU NEED TO FETCH PRODUCT BY ID  FROM API AND SET SELECTED ITEM
+//REQUIRED IF YOU NEED TO FETCH PRODUCT BY ID  FROM API AND SET SELECTED ITEM
 
-  // void setCurrentItem(
-  //     String productId, GlobalKey<ScaffoldState> scaffoldKey) async {
-  //   try {
-  //     _isLoadingProduct = true;
+// void setCurrentItem(
+//     String productId, GlobalKey<ScaffoldState> scaffoldKey) async {
+//   try {
+//     _isLoadingProduct = true;
 
-  //     var response = await _productService.getProductById(productId);
+//     var response = await _productService.getProductById(productId);
 
-  //     if (response.statusCode == 200) {
-  //       var responseJsonStr = json.decode(response.body);
-  //       var jsonProd = responseJsonStr['data']['product'];
-  //       var product = Product.fromJson(jsonProd);
-  //       var item = CartItem(product: product, quantity: 1);
-  //       if (isItemInCart(item)) {
-  //         var foundItem = getCartItem(item);
-  //         _selectedItem = foundItem;
-  //         _isLoadingProduct = false;
-  //         notifyListeners();
-  //       } else {
-  //         _selectedItem = CartItem(product: product, quantity: 1);
-  //         _isLoadingProduct = false;
-  //         notifyListeners();
-  //       }
-  //     } else {
-  //       ErrorController.showErrorFromApi(scaffoldKey, response);
-  //     }
-  //   } on SocketException catch (_) {
-  //     ErrorController.showNoInternetError(scaffoldKey);
-  //   } on HttpException catch (_) {
-  //     ErrorController.showNoServerError(scaffoldKey);
-  //   } on FormatException catch (_) {
-  //     ErrorController.showFormatExceptionError(scaffoldKey);
-  //   } catch (e) {
-  //     print("Error ${e.toString()}");
-  //     ErrorController.showUnKownError(scaffoldKey);
-  //   }
-  // }
+//     if (response.statusCode == 200) {
+//       var responseJsonStr = json.decode(response.body);
+//       var jsonProd = responseJsonStr['data']['product'];
+//       var product = Product.fromJson(jsonProd);
+//       var item = CartItem(product: product, quantity: 1);
+//       if (isItemInCart(item)) {
+//         var foundItem = getCartItem(item);
+//         _selectedItem = foundItem;
+//         _isLoadingProduct = false;
+//         notifyListeners();
+//       } else {
+//         _selectedItem = CartItem(product: product, quantity: 1);
+//         _isLoadingProduct = false;
+//         notifyListeners();
+//       }
+//     } else {
+//       ErrorController.showErrorFromApi(scaffoldKey, response);
+//     }
+//   } on SocketException catch (_) {
+//     ErrorController.showNoInternetError(scaffoldKey);
+//   } on HttpException catch (_) {
+//     ErrorController.showNoServerError(scaffoldKey);
+//   } on FormatException catch (_) {
+//     ErrorController.showFormatExceptionError(scaffoldKey);
+//   } catch (e) {
+//     print("Error ${e.toString()}");
+//     ErrorController.showUnKownError(scaffoldKey);
+//   }
+// }
 
 }

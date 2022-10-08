@@ -60,11 +60,11 @@ class _ProductListState extends State<ProductList> {
   //   _categorySelectedIndex = null;
   // }
 
-  Future<bool> _handleRefresh() {
+  Future<bool> _handleRefresh()async {
     _productController.setIsLoadingAllProducts(true);
     _categoryController.setIsLoadingCategories(true);
-    _categoryController.getAllCategories(_scaffoldKey);
-    _productController.getAllProducts(_scaffoldKey);
+    await _categoryController.getAllCategories(_scaffoldKey);
+    await _productController.getAllProducts(_scaffoldKey);
     _categorySelectedIndex = 0;
     return Future.value(true);
   }

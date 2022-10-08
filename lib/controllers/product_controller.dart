@@ -24,7 +24,7 @@ class ProductController extends ChangeNotifier {
   }
 
 //todo buildcontext is passed i guess
-  void getAllProducts(GlobalKey<ScaffoldState> scaffoldKey) async {
+  Future<void> getAllProducts(GlobalKey<ScaffoldState> scaffoldKey)  async {
     try {
       _isLoadingAllProducts = true;
 

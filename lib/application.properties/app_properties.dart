@@ -33,7 +33,11 @@ class AppProperties {
 
   static String changenameUrl = '$_baseApiUrl/people/updatename/';
 
-  static String changeMailUrl = '$_baseApiUrl/people/updatemail/';
+  static String changeMailUrl = '$_baseApiUrl/people/updateemail/';
+
+  static String changePasswordUrl = '$_baseApiUrl/people/changepassword/';
 
   static String forgotPasswordUrl = '$_baseApiUrl/people/forgotpassword/';
+
+  static String resetPasswordUrl = '$_baseApiUrl/people/resetpassword/';
 }
