@@ -91,22 +91,16 @@ class AuthService {
       body: json.encode(bodyObject),
     );
   }
-  Future resetPassword(String email) async {
-    Map<String, String> bodyObject  = {'email' : email};
-    return await http.post(
-      Uri.parse(AppProperties.resetPasswordUrl),
-      headers: headers,
-      body: json.encode(bodyObject),
-    );
-  }
 
-  Future changePassword(String password, String email) async {
+  Future changePassword(String token, String email) async {
     //TODO TOKEN
     //headers.putIfAbsent('Authorization', () => 'Bearer $jwtToken');
-    Map<String, String> bodyObject  = {'user': email, 'email' : password};
+    final bodyObject  = {'token': token, 'email' : email};
+
+
 
     return await http.patch(
-      Uri.parse(AppProperties.changeMailUrl),
+      Uri.parse(AppProperties.resetPasswordUrl),
       headers: headers,
       body: json.encode(bodyObject),
     );

@@ -10,3 +10,4 @@ const orderHistoryScreenId = 'OrderHistoryScreen';
 const profileScreenId = 'ProfileScreen';
 const exampleScreenId = 'ExampleScreen';
 const stripPaymentId = 'StripPaymentId';
+const changePasswordId = 'ChangePasswordScreen';

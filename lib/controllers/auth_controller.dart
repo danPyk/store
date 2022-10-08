@@ -20,17 +20,15 @@ class AuthController {
   AuthController(this._authService);
 
   Future<void> saveUserDataAndLoginStatus(
-    String userId,
-    String isLoggedFlag,
-    String jwt,
-    String email,
-    String name,
-  ) async {
+      String userId, String isLoggedFlag, String jwt, String email, String name,
+      //todo
+      {String? token}) async {
     await _storage.write(key: 'UserId', value: userId);
     await _storage.write(key: 'IsLoggedFlag', value: isLoggedFlag);
     await _storage.write(key: 'jwt', value: jwt);
     await _storage.write(key: 'email', value: email);
     await _storage.write(key: 'name', value: name);
+    await _storage.write(key: 'token', value: token);
   }
 
   Future<List<String?>> getUserDataAndLoginStatus() async {
@@ -215,7 +213,7 @@ class AuthController {
       var response = await _authService.forgotPassword(email);
 
       if (response.statusCode == 200) {
-        var responseBody = json.decode(response.body);
+        Map<String, dynamic> responseBody = json.decode(response.body);
 
         GlobalSnackBar.showSnackbar(
           scaffoldKey,
@@ -244,12 +242,16 @@ class AuthController {
     }
   }
 
+//todo later send hased password, also when account creating
   Future<bool> changePassword(
       String password, GlobalKey<ScaffoldState> scaffoldKey) async {
     try {
-      var data = await getUserDataAndLoginStatus();
-var email = data[3];
-      var response = await _authService.changePassword(password, email!);
+      //todo restore email?
+        var data = await getUserDataAndLoginStatus();
+      String? email = data[3];
+      //todo hardcoded mail val
+      //TODO ALSO SEND TOKEN
+      var response = await _authService.changePassword(password, 'c@c.pl');
 
       if (response.statusCode == 200) {
         var responseBody = json.decode(response.body);

@@ -31,6 +31,8 @@ class AppProperties {
 
   static String signInUrl = '$_baseApiUrl/people/signin/';
 
+  ///PEOPLE / CREDENTIALS
+
   static String changenameUrl = '$_baseApiUrl/people/updatename/';
 
   static String changeMailUrl = '$_baseApiUrl/people/updateemail/';

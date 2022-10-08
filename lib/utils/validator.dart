@@ -12,4 +12,12 @@ class Validator {
   static bool isEmailValid(String email) {
     return RegExp(r"\S+@\S+\.\S+").hasMatch(email);
   }
+
+  static bool minPasswordLenght(String password) {
+    if (password.length != 6) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

@@ -9,6 +9,7 @@ import 'package:store/controllers/shipping_controller.dart';
 import 'package:store/injection.dart';
 import 'package:store/screens/STRIPE_PAYMENT.dart';
 import 'package:store/screens/auth_screen.dart';
+import 'package:store/screens/change_password.dart';
 import 'package:store/screens/order_history.dart';
 import 'package:store/screens/payment_method.dart' as pm;
 import 'package:store/screens/product_detail.dart';
@@ -74,6 +75,7 @@ class Main extends StatelessWidget {
           OrderHistory.id: (context) => const OrderHistory(),
           Profile.id: (context) => const Profile(),
           StripPayment.id: (context) => const StripPayment(),
+          ChangePassword.id: (context) => const ChangePassword(),
         },
       ),
     );
