@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProductList extends StatefulWidget {
-  const ProductList({ Key? key}) : super(key: key);
+  const ProductList({Key? key}) : super(key: key);
   static String id = productListScreenId;
 
   @override
@@ -25,10 +25,11 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   final _textEditingController = TextEditingController();
-   late int _categorySelectedIndex;
+  late int _categorySelectedIndex;
   late final ProductController _productController;
   var _cartController;
   var _categoryController;
+
   //todo get ridf of all globalkeys
   //https://stackoverflow.com/questions/51253630/flutter-access-parent-scaffold-from-different-dart-file
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -43,7 +44,7 @@ class _ProductListState extends State<ProductList> {
     _categoryController.getAllCategories(_scaffoldKey);
     _cartController = Provider.of<CartController>(context, listen: false);
     _cartController.getSavedCart();
-   // _textEditingController.addListener(_handleSearchField);
+    // _textEditingController.addListener(_handleSearchField);
     _categorySelectedIndex = 0;
   }
 
@@ -60,7 +61,7 @@ class _ProductListState extends State<ProductList> {
   //   _categorySelectedIndex = null;
   // }
 
-  Future<bool> _handleRefresh()async {
+  Future<bool> _handleRefresh() async {
     _productController.setIsLoadingAllProducts(true);
     _categoryController.setIsLoadingCategories(true);
     await _categoryController.getAllCategories(_scaffoldKey);
@@ -187,10 +188,10 @@ class _ProductListState extends State<ProductList> {
                     return Shimmer.fromColors(
                       baseColor: Colors.grey[200]!,
                       highlightColor: Colors.grey[400]!,
-                      child:  const CategoryListSkeleton(),
+                      child: const CategoryListSkeleton(),
                     );
                   }
-
+                  ///CATEGORY browser
                   return ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: cateogoryCtlr.categoryList.length,
@@ -227,7 +228,7 @@ class _ProductListState extends State<ProductList> {
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey[200]!,
                         highlightColor: Colors.grey[400]!,
-                        child:  const ProductListSkeleton(),
+                        child: const ProductListSkeleton(),
                       ),
                     );
                   }
@@ -245,7 +246,8 @@ class _ProductListState extends State<ProductList> {
                   }
 
                   return GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 15,

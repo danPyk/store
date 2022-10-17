@@ -13,7 +13,7 @@ server/.env.example
 server/tsconfig.json/
 lib/configStripe.dart
 lib/.env.dart/
-
+lib/services/auth_service.dart
 # IntelliJ related
 *.iml
 *.ipr
@@ -36,8 +36,6 @@ lib/.env.dart/
 .pub/
 /build/
 lib/constants/api_config.dart
-lib/services/auth_service.dart
-
 # Symbolication related
 app.*.symbols
 

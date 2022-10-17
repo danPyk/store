@@ -18,7 +18,7 @@ enum AuthScreenId {
   ForgotPassword_Screen,
   ChangePassword_Screen
 }
-
+//https://store-b2244.web.app/#thankYouScreenId
 //todo later add animation when changing pages, plus buttons
 class ChangePassword extends StatefulWidget {
   //used for navigation using named route

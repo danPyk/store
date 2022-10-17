@@ -109,7 +109,7 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
     );
   }
-//todo probably called every time
+//todo called every time
   List<Widget> formTextFields() {
     if (_authScreenId == AuthScreenId.SignIn_Screen) {
       return [
@@ -230,7 +230,6 @@ class _AuthScreenState extends State<AuthScreen> {
             if (value.length < 6) {
               return "Too short";
             }
-            return null;
           },
         ),
         const SizedBox(

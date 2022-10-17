@@ -23,7 +23,7 @@ class Product {
   String name;
 
   //todo can be null maybe?
-  //todo price might need to be changed into int
+  //todo price might need to be changed into double
   int price;
   String imageUrl;
   String category;

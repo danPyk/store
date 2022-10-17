@@ -6,6 +6,12 @@ import 'package:store/constants/error/excpetions.dart';
 @injectable
 class ProductService {
 //todo LATER fullfill status codes
+
+  // var header = {
+  //   'Access-Control-Allow-Origin': '89.230.243.34:27017',
+  //   'Access-Control-Allow-Methods': 'GET, DELETE, HEAD, OPTIONS'
+  //
+  // };
   Future<http.Response> getAllProducts() async {
     http.Response result = await http.get(Uri.parse(AppProperties.productUrl));
     if (result.statusCode == 200) {
