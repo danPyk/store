@@ -1,12 +1,12 @@
 import 'package:http/http.dart' as http;
+import 'package:store/constants/api_config.dart';
 import 'package:store/constants/screen_ids.dart';
 import 'package:store/constants/screen_titles.dart';
 import 'package:store/screens/products_list.dart';
 import 'package:store/screens/single_order.dart';
 import 'package:flutter/material.dart';
+import 'package:store/services/product_service.dart';
 
-import '../constants/api_config.dart';
-import '../services/product_service.dart';
 
 class Thanks extends StatelessWidget {
    Thanks({Key? key}) : super(key: key);
