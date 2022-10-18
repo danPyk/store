@@ -1,7 +1,7 @@
 import 'package:store/constants/api_config.dart';
 
 class AppProperties {
-  static const String _baseApiUrl = ApiConfig.host;
+  static  final String _baseApiUrl = ApiConfig.host;
 
   ///PRODUCT
 
