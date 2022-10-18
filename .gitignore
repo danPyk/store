@@ -35,7 +35,6 @@ lib/services/auth_service.dart
 .pub-cache/
 .pub/
 /build/
-lib/constants/api_config.dart
 # Symbolication related
 app.*.symbols
 
