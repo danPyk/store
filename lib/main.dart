@@ -27,12 +27,13 @@ import 'package:firebase_core/firebase_core.dart';
 import '../firebase_options.dart';
 
 void main() async {
-  configureDependencies();
-  WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  configureDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+
+
   //TODO add different orientation
   Stripe.publishableKey = stripePublishableKey;
   await Stripe.instance.applySettings();
